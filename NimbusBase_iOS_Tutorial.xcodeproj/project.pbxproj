@@ -1,0 +1,586 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
+		BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */; };
+		BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203D18A385AF00BBC60E /* UIKit.framework */; };
+		BEAC204018A385AF00BBC60E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203F18A385AF00BBC60E /* CoreData.framework */; };
+		BEAC204618A385AF00BBC60E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAC204418A385AF00BBC60E /* InfoPlist.strings */; };
+		BEAC204818A385AF00BBC60E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204718A385AF00BBC60E /* main.m */; };
+		BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */; };
+		BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */; };
+		BEAC205118A385AF00BBC60E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEAC205018A385AF00BBC60E /* Images.xcassets */; };
+		BEAC205818A385AF00BBC60E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC205718A385AF00BBC60E /* XCTest.framework */; };
+		BEAC205918A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
+		BEAC205A18A385AF00BBC60E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203D18A385AF00BBC60E /* UIKit.framework */; };
+		BEAC205B18A385AF00BBC60E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203F18A385AF00BBC60E /* CoreData.framework */; };
+		BEAC206318A385AF00BBC60E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAC206118A385AF00BBC60E /* InfoPlist.strings */; };
+		BEAC206518A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC206418A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m */; };
+		BEAC208D18A38B5300BBC60E /* libNimbusBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC208A18A38B5300BBC60E /* libNimbusBase.a */; };
+		BEAC208E18A38B5300BBC60E /* NimbusBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */; };
+		BEAC209018A38B6900BBC60E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC208F18A38B6900BBC60E /* MobileCoreServices.framework */; };
+		BEAC209218A38B7500BBC60E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209118A38B7500BBC60E /* QuartzCore.framework */; };
+		BEAC209418A38B8000BBC60E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209318A38B8000BBC60E /* Security.framework */; };
+		BEAC209618A38B8A00BBC60E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BEAC205C18A385AF00BBC60E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEAC202E18A385AE00BBC60E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEAC203518A385AE00BBC60E;
+			remoteInfo = NimbusBase_iOS_Tutorial;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbusBase_iOS_Tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEAC203918A385AF00BBC60E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BEAC203D18A385AF00BBC60E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BEAC203F18A385AF00BBC60E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BEAC204318A385AF00BBC60E /* NimbusBase_iOS_Tutorial-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NimbusBase_iOS_Tutorial-Info.plist"; sourceTree = "<group>"; };
+		BEAC204518A385AF00BBC60E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEAC204718A385AF00BBC60E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BEAC204918A385AF00BBC60E /* NimbusBase_iOS_Tutorial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbusBase_iOS_Tutorial-Prefix.pch"; sourceTree = "<group>"; };
+		BEAC204A18A385AF00BBC60E /* NITAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NITAppDelegate.h; sourceTree = "<group>"; };
+		BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NITAppDelegate.m; sourceTree = "<group>"; };
+		BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NimbusBase_iOS_Tutorial.xcdatamodel; sourceTree = "<group>"; };
+		BEAC205018A385AF00BBC60E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BEAC205618A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbusBase_iOS_TutorialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEAC205718A385AF00BBC60E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BEAC206018A385AF00BBC60E /* NimbusBase_iOS_TutorialTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NimbusBase_iOS_TutorialTests-Info.plist"; sourceTree = "<group>"; };
+		BEAC206218A385AF00BBC60E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEAC206418A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NimbusBase_iOS_TutorialTests.m; sourceTree = "<group>"; };
+		BEAC207D18A38B5300BBC60E /* NimbusBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusBase.h; sourceTree = "<group>"; };
+		BEAC207E18A38B5300BBC60E /* NMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBase.h; sourceTree = "<group>"; };
+		BEAC207F18A38B5300BBC60E /* NMBConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigs.h; sourceTree = "<group>"; };
+		BEAC208018A38B5300BBC60E /* NMBConfigurableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigurableObject.h; sourceTree = "<group>"; };
+		BEAC208118A38B5300BBC60E /* NMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConstants.h; sourceTree = "<group>"; };
+		BEAC208218A38B5300BBC60E /* NMBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFile.h; sourceTree = "<group>"; };
+		BEAC208318A38B5300BBC60E /* NMBFileForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFileForm.h; sourceTree = "<group>"; };
+		BEAC208418A38B5300BBC60E /* NMBNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBNotificationCenter.h; sourceTree = "<group>"; };
+		BEAC208518A38B5300BBC60E /* NMBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBObject.h; sourceTree = "<group>"; };
+		BEAC208618A38B5300BBC60E /* NMBPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBPromise.h; sourceTree = "<group>"; };
+		BEAC208718A38B5300BBC60E /* NMBServer+Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Auth.h"; sourceTree = "<group>"; };
+		BEAC208818A38B5300BBC60E /* NMBServer+Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Client.h"; sourceTree = "<group>"; };
+		BEAC208918A38B5300BBC60E /* NMBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBServer.h; sourceTree = "<group>"; };
+		BEAC208A18A38B5300BBC60E /* libNimbusBase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNimbusBase.a; sourceTree = "<group>"; };
+		BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NimbusBaseResources.bundle; sourceTree = "<group>"; };
+		BEAC208F18A38B6900BBC60E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		BEAC209118A38B7500BBC60E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BEAC209318A38B8000BBC60E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEAC203318A385AE00BBC60E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC209618A38B8A00BBC60E /* SystemConfiguration.framework in Frameworks */,
+				BEAC209418A38B8000BBC60E /* Security.framework in Frameworks */,
+				BEAC209218A38B7500BBC60E /* QuartzCore.framework in Frameworks */,
+				BEAC209018A38B6900BBC60E /* MobileCoreServices.framework in Frameworks */,
+				BEAC208D18A38B5300BBC60E /* libNimbusBase.a in Frameworks */,
+				BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */,
+				BEAC204018A385AF00BBC60E /* CoreData.framework in Frameworks */,
+				BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */,
+				BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEAC205318A385AF00BBC60E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC205818A385AF00BBC60E /* XCTest.framework in Frameworks */,
+				BEAC205B18A385AF00BBC60E /* CoreData.framework in Frameworks */,
+				BEAC205A18A385AF00BBC60E /* UIKit.framework in Frameworks */,
+				BEAC205918A385AF00BBC60E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEAC202D18A385AE00BBC60E = {
+			isa = PBXGroup;
+			children = (
+				BEAC204118A385AF00BBC60E /* NimbusBase_iOS_Tutorial */,
+				BEAC205E18A385AF00BBC60E /* NimbusBase_iOS_TutorialTests */,
+				BEAC207A18A38B5300BBC60E /* Venders */,
+				BEAC203818A385AE00BBC60E /* Frameworks */,
+				BEAC203718A385AE00BBC60E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEAC203718A385AE00BBC60E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */,
+				BEAC205618A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEAC203818A385AE00BBC60E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */,
+				BEAC209318A38B8000BBC60E /* Security.framework */,
+				BEAC209118A38B7500BBC60E /* QuartzCore.framework */,
+				BEAC208F18A38B6900BBC60E /* MobileCoreServices.framework */,
+				BEAC203918A385AF00BBC60E /* Foundation.framework */,
+				BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */,
+				BEAC203D18A385AF00BBC60E /* UIKit.framework */,
+				BEAC203F18A385AF00BBC60E /* CoreData.framework */,
+				BEAC205718A385AF00BBC60E /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BEAC204118A385AF00BBC60E /* NimbusBase_iOS_Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC207918A38B2100BBC60E /* Classes */,
+				BEAC204A18A385AF00BBC60E /* NITAppDelegate.h */,
+				BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */,
+				BEAC205018A385AF00BBC60E /* Images.xcassets */,
+				BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */,
+				BEAC204218A385AF00BBC60E /* Supporting Files */,
+			);
+			path = NimbusBase_iOS_Tutorial;
+			sourceTree = "<group>";
+		};
+		BEAC204218A385AF00BBC60E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC204318A385AF00BBC60E /* NimbusBase_iOS_Tutorial-Info.plist */,
+				BEAC204418A385AF00BBC60E /* InfoPlist.strings */,
+				BEAC204718A385AF00BBC60E /* main.m */,
+				BEAC204918A385AF00BBC60E /* NimbusBase_iOS_Tutorial-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEAC205E18A385AF00BBC60E /* NimbusBase_iOS_TutorialTests */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC206418A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m */,
+				BEAC205F18A385AF00BBC60E /* Supporting Files */,
+			);
+			path = NimbusBase_iOS_TutorialTests;
+			sourceTree = "<group>";
+		};
+		BEAC205F18A385AF00BBC60E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC206018A385AF00BBC60E /* NimbusBase_iOS_TutorialTests-Info.plist */,
+				BEAC206118A385AF00BBC60E /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEAC207918A38B2100BBC60E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		BEAC207A18A38B5300BBC60E /* Venders */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC207B18A38B5300BBC60E /* NimbusBase */,
+			);
+			path = Venders;
+			sourceTree = "<group>";
+		};
+		BEAC207B18A38B5300BBC60E /* NimbusBase */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC207C18A38B5300BBC60E /* Headers */,
+				BEAC208A18A38B5300BBC60E /* libNimbusBase.a */,
+				BEAC208B18A38B5300BBC60E /* Resources */,
+			);
+			path = NimbusBase;
+			sourceTree = "<group>";
+		};
+		BEAC207C18A38B5300BBC60E /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC207D18A38B5300BBC60E /* NimbusBase.h */,
+				BEAC207E18A38B5300BBC60E /* NMBase.h */,
+				BEAC207F18A38B5300BBC60E /* NMBConfigs.h */,
+				BEAC208018A38B5300BBC60E /* NMBConfigurableObject.h */,
+				BEAC208118A38B5300BBC60E /* NMBConstants.h */,
+				BEAC208218A38B5300BBC60E /* NMBFile.h */,
+				BEAC208318A38B5300BBC60E /* NMBFileForm.h */,
+				BEAC208418A38B5300BBC60E /* NMBNotificationCenter.h */,
+				BEAC208518A38B5300BBC60E /* NMBObject.h */,
+				BEAC208618A38B5300BBC60E /* NMBPromise.h */,
+				BEAC208718A38B5300BBC60E /* NMBServer+Auth.h */,
+				BEAC208818A38B5300BBC60E /* NMBServer+Client.h */,
+				BEAC208918A38B5300BBC60E /* NMBServer.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		BEAC208B18A38B5300BBC60E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEAC203518A385AE00BBC60E /* NimbusBase_iOS_Tutorial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEAC206818A385AF00BBC60E /* Build configuration list for PBXNativeTarget "NimbusBase_iOS_Tutorial" */;
+			buildPhases = (
+				BEAC203218A385AE00BBC60E /* Sources */,
+				BEAC203318A385AE00BBC60E /* Frameworks */,
+				BEAC203418A385AE00BBC60E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NimbusBase_iOS_Tutorial;
+			productName = NimbusBase_iOS_Tutorial;
+			productReference = BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BEAC205518A385AF00BBC60E /* NimbusBase_iOS_TutorialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEAC206B18A385AF00BBC60E /* Build configuration list for PBXNativeTarget "NimbusBase_iOS_TutorialTests" */;
+			buildPhases = (
+				BEAC205218A385AF00BBC60E /* Sources */,
+				BEAC205318A385AF00BBC60E /* Frameworks */,
+				BEAC205418A385AF00BBC60E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEAC205D18A385AF00BBC60E /* PBXTargetDependency */,
+			);
+			name = NimbusBase_iOS_TutorialTests;
+			productName = NimbusBase_iOS_TutorialTests;
+			productReference = BEAC205618A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEAC202E18A385AE00BBC60E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NIT;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = NimbusBase;
+				TargetAttributes = {
+					BEAC205518A385AF00BBC60E = {
+						TestTargetID = BEAC203518A385AE00BBC60E;
+					};
+				};
+			};
+			buildConfigurationList = BEAC203118A385AE00BBC60E /* Build configuration list for PBXProject "NimbusBase_iOS_Tutorial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BEAC202D18A385AE00BBC60E;
+			productRefGroup = BEAC203718A385AE00BBC60E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEAC203518A385AE00BBC60E /* NimbusBase_iOS_Tutorial */,
+				BEAC205518A385AF00BBC60E /* NimbusBase_iOS_TutorialTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEAC203418A385AE00BBC60E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC208E18A38B5300BBC60E /* NimbusBaseResources.bundle in Resources */,
+				BEAC204618A385AF00BBC60E /* InfoPlist.strings in Resources */,
+				BEAC205118A385AF00BBC60E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEAC205418A385AF00BBC60E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC206318A385AF00BBC60E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEAC203218A385AE00BBC60E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
+				BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
+				BEAC204818A385AF00BBC60E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEAC205218A385AF00BBC60E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEAC206518A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEAC205D18A385AF00BBC60E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEAC203518A385AE00BBC60E /* NimbusBase_iOS_Tutorial */;
+			targetProxy = BEAC205C18A385AF00BBC60E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BEAC204418A385AF00BBC60E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEAC204518A385AF00BBC60E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BEAC206118A385AF00BBC60E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEAC206218A385AF00BBC60E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEAC206618A385AF00BBC60E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BEAC206718A385AF00BBC60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEAC206918A385AF00BBC60E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
+				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Will/Documents/MyDocumets/NimbusBase/NimbusBase_iOS_Tutorial/Venders/NimbusBase,
+				);
+				OTHER_LDFLAGS = (
+					"-ObjeC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BEAC206A18A385AF00BBC60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
+				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/Will/Documents/MyDocumets/NimbusBase/NimbusBase_iOS_Tutorial/Venders/NimbusBase,
+				);
+				OTHER_LDFLAGS = (
+					"-ObjeC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BEAC206C18A385AF00BBC60E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NimbusBase_iOS_Tutorial.app/NimbusBase_iOS_Tutorial";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NimbusBase_iOS_TutorialTests/NimbusBase_iOS_TutorialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BEAC206D18A385AF00BBC60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NimbusBase_iOS_Tutorial.app/NimbusBase_iOS_Tutorial";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
+				INFOPLIST_FILE = "NimbusBase_iOS_TutorialTests/NimbusBase_iOS_TutorialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEAC203118A385AE00BBC60E /* Build configuration list for PBXProject "NimbusBase_iOS_Tutorial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEAC206618A385AF00BBC60E /* Debug */,
+				BEAC206718A385AF00BBC60E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEAC206818A385AF00BBC60E /* Build configuration list for PBXNativeTarget "NimbusBase_iOS_Tutorial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEAC206918A385AF00BBC60E /* Debug */,
+				BEAC206A18A385AF00BBC60E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BEAC206B18A385AF00BBC60E /* Build configuration list for PBXNativeTarget "NimbusBase_iOS_TutorialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEAC206C18A385AF00BBC60E /* Debug */,
+				BEAC206D18A385AF00BBC60E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */,
+			);
+			currentVersion = BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */;
+			path = NimbusBase_iOS_Tutorial.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BEAC202E18A385AE00BBC60E /* Project object */;
+}
