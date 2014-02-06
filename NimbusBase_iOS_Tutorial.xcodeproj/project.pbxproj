@@ -22,12 +22,13 @@
 		BEAC205B18A385AF00BBC60E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203F18A385AF00BBC60E /* CoreData.framework */; };
 		BEAC206318A385AF00BBC60E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAC206118A385AF00BBC60E /* InfoPlist.strings */; };
 		BEAC206518A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC206418A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m */; };
-		BEAC208D18A38B5300BBC60E /* libNimbusBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC208A18A38B5300BBC60E /* libNimbusBase.a */; };
-		BEAC208E18A38B5300BBC60E /* NimbusBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */; };
 		BEAC209018A38B6900BBC60E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC208F18A38B6900BBC60E /* MobileCoreServices.framework */; };
 		BEAC209218A38B7500BBC60E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209118A38B7500BBC60E /* QuartzCore.framework */; };
 		BEAC209418A38B8000BBC60E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209318A38B8000BBC60E /* Security.framework */; };
 		BEAC209618A38B8A00BBC60E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */; };
+		BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC209818A38F1300BBC60E /* NMBase+NIT.m */; };
+		BEAC20CE18A391C400BBC60E /* libNimbusBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC20CB18A391C400BBC60E /* libNimbusBase.a */; };
+		BEAC20CF18A391C400BBC60E /* NimbusBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,25 +60,27 @@
 		BEAC206018A385AF00BBC60E /* NimbusBase_iOS_TutorialTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NimbusBase_iOS_TutorialTests-Info.plist"; sourceTree = "<group>"; };
 		BEAC206218A385AF00BBC60E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BEAC206418A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NimbusBase_iOS_TutorialTests.m; sourceTree = "<group>"; };
-		BEAC207D18A38B5300BBC60E /* NimbusBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusBase.h; sourceTree = "<group>"; };
-		BEAC207E18A38B5300BBC60E /* NMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBase.h; sourceTree = "<group>"; };
-		BEAC207F18A38B5300BBC60E /* NMBConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigs.h; sourceTree = "<group>"; };
-		BEAC208018A38B5300BBC60E /* NMBConfigurableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigurableObject.h; sourceTree = "<group>"; };
-		BEAC208118A38B5300BBC60E /* NMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConstants.h; sourceTree = "<group>"; };
-		BEAC208218A38B5300BBC60E /* NMBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFile.h; sourceTree = "<group>"; };
-		BEAC208318A38B5300BBC60E /* NMBFileForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFileForm.h; sourceTree = "<group>"; };
-		BEAC208418A38B5300BBC60E /* NMBNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBNotificationCenter.h; sourceTree = "<group>"; };
-		BEAC208518A38B5300BBC60E /* NMBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBObject.h; sourceTree = "<group>"; };
-		BEAC208618A38B5300BBC60E /* NMBPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBPromise.h; sourceTree = "<group>"; };
-		BEAC208718A38B5300BBC60E /* NMBServer+Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Auth.h"; sourceTree = "<group>"; };
-		BEAC208818A38B5300BBC60E /* NMBServer+Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Client.h"; sourceTree = "<group>"; };
-		BEAC208918A38B5300BBC60E /* NMBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBServer.h; sourceTree = "<group>"; };
-		BEAC208A18A38B5300BBC60E /* libNimbusBase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNimbusBase.a; sourceTree = "<group>"; };
-		BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NimbusBaseResources.bundle; sourceTree = "<group>"; };
 		BEAC208F18A38B6900BBC60E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		BEAC209118A38B7500BBC60E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BEAC209318A38B8000BBC60E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BEAC209718A38F1300BBC60E /* NMBase+NIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBase+NIT.h"; sourceTree = "<group>"; };
+		BEAC209818A38F1300BBC60E /* NMBase+NIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NMBase+NIT.m"; sourceTree = "<group>"; };
+		BEAC20BE18A391C400BBC60E /* NimbusBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusBase.h; sourceTree = "<group>"; };
+		BEAC20BF18A391C400BBC60E /* NMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBase.h; sourceTree = "<group>"; };
+		BEAC20C018A391C400BBC60E /* NMBConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigs.h; sourceTree = "<group>"; };
+		BEAC20C118A391C400BBC60E /* NMBConfigurableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigurableObject.h; sourceTree = "<group>"; };
+		BEAC20C218A391C400BBC60E /* NMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConstants.h; sourceTree = "<group>"; };
+		BEAC20C318A391C400BBC60E /* NMBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFile.h; sourceTree = "<group>"; };
+		BEAC20C418A391C400BBC60E /* NMBFileForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFileForm.h; sourceTree = "<group>"; };
+		BEAC20C518A391C400BBC60E /* NMBNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBNotificationCenter.h; sourceTree = "<group>"; };
+		BEAC20C618A391C400BBC60E /* NMBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBObject.h; sourceTree = "<group>"; };
+		BEAC20C718A391C400BBC60E /* NMBPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBPromise.h; sourceTree = "<group>"; };
+		BEAC20C818A391C400BBC60E /* NMBServer+Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Auth.h"; sourceTree = "<group>"; };
+		BEAC20C918A391C400BBC60E /* NMBServer+Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Client.h"; sourceTree = "<group>"; };
+		BEAC20CA18A391C400BBC60E /* NMBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBServer.h; sourceTree = "<group>"; };
+		BEAC20CB18A391C400BBC60E /* libNimbusBase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNimbusBase.a; sourceTree = "<group>"; };
+		BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NimbusBaseResources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +92,10 @@
 				BEAC209418A38B8000BBC60E /* Security.framework in Frameworks */,
 				BEAC209218A38B7500BBC60E /* QuartzCore.framework in Frameworks */,
 				BEAC209018A38B6900BBC60E /* MobileCoreServices.framework in Frameworks */,
-				BEAC208D18A38B5300BBC60E /* libNimbusBase.a in Frameworks */,
 				BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */,
 				BEAC204018A385AF00BBC60E /* CoreData.framework in Frameworks */,
 				BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */,
+				BEAC20CE18A391C400BBC60E /* libNimbusBase.a in Frameworks */,
 				BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,9 +153,9 @@
 		BEAC204118A385AF00BBC60E /* NimbusBase_iOS_Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC207918A38B2100BBC60E /* Classes */,
 				BEAC204A18A385AF00BBC60E /* NITAppDelegate.h */,
 				BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */,
+				BEAC207918A38B2100BBC60E /* Classes */,
 				BEAC205018A385AF00BBC60E /* Images.xcassets */,
 				BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */,
 				BEAC204218A385AF00BBC60E /* Supporting Files */,
@@ -192,6 +195,8 @@
 		BEAC207918A38B2100BBC60E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BEAC209718A38F1300BBC60E /* NMBase+NIT.h */,
+				BEAC209818A38F1300BBC60E /* NMBase+NIT.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -199,45 +204,45 @@
 		BEAC207A18A38B5300BBC60E /* Venders */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC207B18A38B5300BBC60E /* NimbusBase */,
+				BEAC20BC18A391C400BBC60E /* NimbusBase */,
 			);
 			path = Venders;
 			sourceTree = "<group>";
 		};
-		BEAC207B18A38B5300BBC60E /* NimbusBase */ = {
+		BEAC20BC18A391C400BBC60E /* NimbusBase */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC207C18A38B5300BBC60E /* Headers */,
-				BEAC208A18A38B5300BBC60E /* libNimbusBase.a */,
-				BEAC208B18A38B5300BBC60E /* Resources */,
+				BEAC20BD18A391C400BBC60E /* Headers */,
+				BEAC20CB18A391C400BBC60E /* libNimbusBase.a */,
+				BEAC20CC18A391C400BBC60E /* Resources */,
 			);
 			path = NimbusBase;
 			sourceTree = "<group>";
 		};
-		BEAC207C18A38B5300BBC60E /* Headers */ = {
+		BEAC20BD18A391C400BBC60E /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC207D18A38B5300BBC60E /* NimbusBase.h */,
-				BEAC207E18A38B5300BBC60E /* NMBase.h */,
-				BEAC207F18A38B5300BBC60E /* NMBConfigs.h */,
-				BEAC208018A38B5300BBC60E /* NMBConfigurableObject.h */,
-				BEAC208118A38B5300BBC60E /* NMBConstants.h */,
-				BEAC208218A38B5300BBC60E /* NMBFile.h */,
-				BEAC208318A38B5300BBC60E /* NMBFileForm.h */,
-				BEAC208418A38B5300BBC60E /* NMBNotificationCenter.h */,
-				BEAC208518A38B5300BBC60E /* NMBObject.h */,
-				BEAC208618A38B5300BBC60E /* NMBPromise.h */,
-				BEAC208718A38B5300BBC60E /* NMBServer+Auth.h */,
-				BEAC208818A38B5300BBC60E /* NMBServer+Client.h */,
-				BEAC208918A38B5300BBC60E /* NMBServer.h */,
+				BEAC20BE18A391C400BBC60E /* NimbusBase.h */,
+				BEAC20BF18A391C400BBC60E /* NMBase.h */,
+				BEAC20C018A391C400BBC60E /* NMBConfigs.h */,
+				BEAC20C118A391C400BBC60E /* NMBConfigurableObject.h */,
+				BEAC20C218A391C400BBC60E /* NMBConstants.h */,
+				BEAC20C318A391C400BBC60E /* NMBFile.h */,
+				BEAC20C418A391C400BBC60E /* NMBFileForm.h */,
+				BEAC20C518A391C400BBC60E /* NMBNotificationCenter.h */,
+				BEAC20C618A391C400BBC60E /* NMBObject.h */,
+				BEAC20C718A391C400BBC60E /* NMBPromise.h */,
+				BEAC20C818A391C400BBC60E /* NMBServer+Auth.h */,
+				BEAC20C918A391C400BBC60E /* NMBServer+Client.h */,
+				BEAC20CA18A391C400BBC60E /* NMBServer.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		BEAC208B18A38B5300BBC60E /* Resources */ = {
+		BEAC20CC18A391C400BBC60E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC208C18A38B5300BBC60E /* NimbusBaseResources.bundle */,
+				BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -318,7 +323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEAC208E18A38B5300BBC60E /* NimbusBaseResources.bundle in Resources */,
+				BEAC20CF18A391C400BBC60E /* NimbusBaseResources.bundle in Resources */,
 				BEAC204618A385AF00BBC60E /* InfoPlist.strings in Resources */,
 				BEAC205118A385AF00BBC60E /* Images.xcassets in Resources */,
 			);
@@ -342,6 +347,7 @@
 				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
 				BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
 				BEAC204818A385AF00BBC60E /* main.m in Sources */,
+				BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,7 +471,7 @@
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Will/Documents/MyDocumets/NimbusBase/NimbusBase_iOS_Tutorial/Venders/NimbusBase,
+					"\"$(SRCROOT)/Venders/NimbusBase\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjeC",
@@ -486,7 +492,7 @@
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/Will/Documents/MyDocumets/NimbusBase/NimbusBase_iOS_Tutorial/Venders/NimbusBase,
+					"\"$(SRCROOT)/Venders/NimbusBase\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjeC",
