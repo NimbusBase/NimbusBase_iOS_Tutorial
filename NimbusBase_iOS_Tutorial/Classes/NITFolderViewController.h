@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 NimbusBase. All rights reserved.
 //
 
-#import "NMTFileViewController.h"
+#import "NITFileViewController.h"
 
 @class NMBFile, NMBServer;
 
-@interface NITFolderViewController : NMTFileViewController
+@interface NITFolderViewController : NITFileViewController
 
 @property(nonatomic, strong)NMBFile* file;
 @property(nonatomic, weak)NMBServer *server;

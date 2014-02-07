@@ -13,8 +13,3 @@
 @interface NITServerCell : UITableViewCell
 @property(nonatomic, weak)NMBServer *server;
 @end
-
-extern NSString * const kvo_name;
-extern NSString * const kvo_logo;
-extern NSString * const kvo_isAuthorized;
-extern NSString * const kvo_progress;

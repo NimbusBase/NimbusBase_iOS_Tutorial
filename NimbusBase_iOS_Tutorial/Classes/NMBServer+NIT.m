@@ -11,8 +11,12 @@
 @implementation NMBServer (NIT)
 
 - (NSString *)authStateAction{
+    return [self.class authStateActionString:self.authState];
+}
+
++ (NSString *)authStateActionString:(NMBAuthState)state{
     NSString *string = @"None";
-    switch (self.authState) {
+    switch (state) {
         case NMBAuthStateSignIn:{
             string = @"Signing In";
         }break;
@@ -30,6 +34,7 @@
     }
     
     return string;
+
 }
 
 + (NSString *)authStateString:(NMBAuthState)state{
@@ -52,6 +57,32 @@
     }
     
     return string;
+}
+
+- (NSString *)cloudType{
+    NSString *className = NSStringFromClass(self.class);
+    NSString *type = nil;
+    if ([className isEqualToString:@"NMBGDrive"]) {
+        type = @"Google Drive";
+    } else if ([className isEqualToString:@"NMBDropbox"]) {
+        type = @"Dropbox";
+    } else if ([className isEqualToString:@"NMBBox"]) {
+        type = @"Box";
+    }
+    return type;
+}
+
+- (NSString *)iconName{
+    NSString *className = NSStringFromClass(self.class);
+    NSString *name = nil;
+    if ([className isEqualToString:@"NMBGDrive"]) {
+        name = @"iconGDrive";
+    } else if ([className isEqualToString:@"NMBDropbox"]) {
+        name = @"iconDropbox";
+    } else if ([className isEqualToString:@"NMBBox"]) {
+        name = @"iconBox";
+    }
+    return name;
 }
 
 @end

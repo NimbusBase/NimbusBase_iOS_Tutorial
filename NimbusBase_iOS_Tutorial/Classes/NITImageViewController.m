@@ -7,7 +7,7 @@
 //
 
 #import "NITImageViewController.h"
-#import <NimbusBase/NimbusBase.h>
+#import "NimbusBase.h"
 
 #import "UIImagePickerController+Picker.h"
 

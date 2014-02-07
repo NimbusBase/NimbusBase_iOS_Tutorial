@@ -7,7 +7,7 @@
 //
 
 #import "NITFileViewController.h"
-#import <NimbusBase/NimbusBase.h>
+#import "NimbusBase.h"
 
 @interface NITFileViewController ()
 

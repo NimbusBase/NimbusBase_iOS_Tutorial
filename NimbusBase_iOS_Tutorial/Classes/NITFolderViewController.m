@@ -7,13 +7,12 @@
 //
 
 #import "NITFolderViewController.h"
-#import <NimbusBase/NimbusBase.h>
+#import "NimbusBase.h"
 
 #import "NITImageViewController.h"
-#import "NMTTextViewController.h"
 #import "UIImagePickerController+Picker.h"
 
-#import "NMTFileCell.h"
+#import "NITFileCell.h"
 
 
 static NSString *CellIdentifier = @"Cell";
@@ -72,7 +71,7 @@ static NSString *CellIdentifier = @"Cell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NMTFileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NITFileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     return cell;
 }
 
@@ -117,13 +116,13 @@ static NSString *CellIdentifier = @"Cell";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     NMBFile *file = self.childrenFiles[indexPath.row];
-    [(NMTFileCell *)cell setFile:file];
+    [(NITFileCell *)cell setFile:file];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NMBFile *file = self.childrenFiles[indexPath.row];
     
-    NMTFileViewController *con = nil;
+    NITFileViewController *con = nil;
     if (file.isFolder) {
         
         con = [[NITFolderViewController alloc] init];
@@ -132,12 +131,7 @@ static NSString *CellIdentifier = @"Cell";
         
         con = [[NITImageViewController alloc] init];
         
-    } else if ([file.mime hasPrefix:@"text/"]) {
-        
-        con = [[NMTTextViewController alloc] init];
-        
     }
-    
     if (con) {
         con.server = self.server;
         con.file = file;
@@ -322,7 +316,7 @@ static NSString *CellIdentifier = @"Cell";
         tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         tableView.delegate = self;
         tableView.dataSource = self;
-        [tableView registerClass:[NMTFileCell class] forCellReuseIdentifier:CellIdentifier];
+        [tableView registerClass:[NITFileCell class] forCellReuseIdentifier:CellIdentifier];
 
         _tableView = tableView;
         [superview addSubview:tableView];

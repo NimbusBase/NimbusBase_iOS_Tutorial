@@ -8,8 +8,11 @@
 
 #import "NITBaseViewController.h"
 #import "NimbusBase.h"
+#import "NMBase+NIT.h"
 
 #import "KVOUtilities.h"
+#import "UIView+AutoLayout.h"
+#import "UITableView+Quick.h"
 
 #import "NITServerViewController.h"
 #import "NITServerCell.h"
@@ -25,10 +28,7 @@
 
 - (void)loadView{
     [super loadView];
-    
-    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)])
-        self.edgesForExtendedLayout=UIRectEdgeNone;
-    
+        
     [self tableView];
 }
 
@@ -36,81 +36,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self regiterNotifications];
+    [self servers];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    UITableView *tableView = self.tableView;
-    [tableView.indexPathsForSelectedRows enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [tableView deselectRowAtIndexPath:obj animated:animated];
-    }];
+    [self.tableView deselectSelectedRowsAnimated:animated];
 }
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc{
-    [NSNoti removeObserver:self];
-}
-
-#pragma mark - Notifications
-- (void)regiterNotifications{
-    
-    
-    NSArray *names = @[NMBNotiAuthBegin,
-                       NMBNotiAuthDidSucceed,
-                       NMBNotiAuthDidFail,
-                       NMBNotiAuthDidCancel,
-                       NMBNotiAuthDidSignOut,];
-    
-    [names enumerateObjectsUsingBlock:^(NSString *name, NSUInteger idx, BOOL *stop) {
-        [NSNoti addObserver:self selector:@selector(receiveNotification:) name:name object:nil];
-    }];
-    
-}
-
-- (void)receiveNotification:(NSNotification *)noti{
-    /*
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        [[[UIAlertView alloc] initWithTitle:noti.name
-                                    message:@"Just show it to test, will disappear in production."
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-        
-    });
-    */
-}
-
-#pragma mark - Subviews
-- (UITableView *)tableView{
-    if (!_tableView) {
-        UIView *superview = self.view;
-        
-        CGRect frame = superview.bounds;
-        CGFloat originY = 0.0f;
-        frame.origin.y = originY;
-        frame.size.height = CGRectGetHeight(superview.bounds) - originY;
-        
-        UITableView *tableView = [[UITableView alloc] initWithFrame:frame];
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
-        
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        
-        tableView.allowsMultipleSelection = YES;
-        
-        [superview addSubview:tableView];
-        self.tableView = tableView;
-        
-    }
-    
-    return _tableView;
 }
 
 #pragma mark - UITableViewDataSource
@@ -135,22 +72,38 @@
     ((NITServerCell *)cell).server = server;
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NMBServer *server = self.servers[indexPath.row];
     NITServerViewController *con = [[NITServerViewController alloc] init];
     con.server = server;
     [self.navigationController pushViewController:con animated:YES];
+}
+
+#pragma mark - Subviews
+- (UITableView *)tableView{
+    if (!_tableView) {
+        UIView *superview = self.view;
+        
+        UITableView *tableView = [[UITableView alloc] init];
+        _tableView = tableView;
+
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        [superview addSubview:tableView];
+        
+        [superview addNoMarginConstraintsToSubview:tableView];
+
+    }
     
-    return indexPath;
+    return _tableView;
 }
 
 #pragma mark - Servers
 - (NSArray *)servers{
     if (!_servers) {
-        NSArray *servers = [[(NMTAppDelegate *)[[UIApplication sharedApplication] delegate] base] servers];
-        
-        self.servers = servers.copy;
+        _servers = [[NMBase sharedBase] servers];
     }
     
     return _servers;

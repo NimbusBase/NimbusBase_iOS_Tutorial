@@ -36,6 +36,10 @@
 		BEB4408018A4840800CF839A /* NITFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407B18A4840800CF839A /* NITFolderViewController.m */; };
 		BEB4408118A4840800CF839A /* NITFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407D18A4840800CF839A /* NITFileViewController.m */; };
 		BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407F18A4840800CF839A /* NITImageViewController.m */; };
+		BEB4408518A4878100CF839A /* UIImagePickerController+Picker.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4408418A4878100CF839A /* UIImagePickerController+Picker.m */; };
+		BEB4408818A4888E00CF839A /* NITFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4408718A4888E00CF839A /* NITFileCell.m */; };
+		BEB4408B18A48A9300CF839A /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4408A18A48A9300CF839A /* UIView+AutoLayout.m */; };
+		BEB4408F18A48C7700CF839A /* UITableView+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4408E18A48C7700CF839A /* UITableView+Quick.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +107,14 @@
 		BEB4407D18A4840800CF839A /* NITFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITFileViewController.m; sourceTree = "<group>"; };
 		BEB4407E18A4840800CF839A /* NITImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITImageViewController.h; sourceTree = "<group>"; };
 		BEB4407F18A4840800CF839A /* NITImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITImageViewController.m; sourceTree = "<group>"; };
+		BEB4408318A4878100CF839A /* UIImagePickerController+Picker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Picker.h"; sourceTree = "<group>"; };
+		BEB4408418A4878100CF839A /* UIImagePickerController+Picker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Picker.m"; sourceTree = "<group>"; };
+		BEB4408618A4888E00CF839A /* NITFileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITFileCell.h; sourceTree = "<group>"; };
+		BEB4408718A4888E00CF839A /* NITFileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITFileCell.m; sourceTree = "<group>"; };
+		BEB4408918A48A9300CF839A /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		BEB4408A18A48A9300CF839A /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		BEB4408D18A48C7700CF839A /* UITableView+Quick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Quick.h"; sourceTree = "<group>"; };
+		BEB4408E18A48C7700CF839A /* UITableView+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Quick.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,7 +232,7 @@
 				BEB4407818A4834700CF839A /* Base */,
 				BEB4407718A4833B00CF839A /* Server */,
 				BEB4407918A483FC00CF839A /* File */,
-				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
+				BEB4408C18A48C5000CF839A /* Quick */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -304,8 +316,24 @@
 				BEB4407D18A4840800CF839A /* NITFileViewController.m */,
 				BEB4407E18A4840800CF839A /* NITImageViewController.h */,
 				BEB4407F18A4840800CF839A /* NITImageViewController.m */,
+				BEB4408618A4888E00CF839A /* NITFileCell.h */,
+				BEB4408718A4888E00CF839A /* NITFileCell.m */,
 			);
 			name = File;
+			sourceTree = "<group>";
+		};
+		BEB4408C18A48C5000CF839A /* Quick */ = {
+			isa = PBXGroup;
+			children = (
+				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
+				BEB4408318A4878100CF839A /* UIImagePickerController+Picker.h */,
+				BEB4408418A4878100CF839A /* UIImagePickerController+Picker.m */,
+				BEB4408918A48A9300CF839A /* UIView+AutoLayout.h */,
+				BEB4408A18A48A9300CF839A /* UIView+AutoLayout.m */,
+				BEB4408D18A48C7700CF839A /* UITableView+Quick.h */,
+				BEB4408E18A48C7700CF839A /* UITableView+Quick.m */,
+			);
+			name = Quick;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,10 +433,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB4408F18A48C7700CF839A /* UITableView+Quick.m in Sources */,
 				BEB4407418A4832B00CF839A /* NMBServer+NIT.m in Sources */,
 				BEB4407618A4832B00CF839A /* NITServerViewController.m in Sources */,
+				BEB4408518A4878100CF839A /* UIImagePickerController+Picker.m in Sources */,
 				BEB4408118A4840800CF839A /* NITFileViewController.m in Sources */,
 				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
+				BEB4408B18A48A9300CF839A /* UIView+AutoLayout.m in Sources */,
 				BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
 				BEB4407518A4832B00CF839A /* NITServerCell.m in Sources */,
 				BEAC204818A385AF00BBC60E /* main.m in Sources */,
@@ -416,6 +447,7 @@
 				BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */,
 				BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */,
 				BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */,
+				BEB4408818A4888E00CF839A /* NITFileCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

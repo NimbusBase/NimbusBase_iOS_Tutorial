@@ -7,6 +7,7 @@
 //
 
 #import "NITAppDelegate.h"
+#import "NITBaseViewController.h"
 
 @implementation NITAppDelegate
 
@@ -18,8 +19,12 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[NITBaseViewController alloc] init]];
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

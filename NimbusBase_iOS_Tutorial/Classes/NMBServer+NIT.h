@@ -11,6 +11,14 @@
 @interface NMBServer (NIT)
 
 @property(nonatomic, readonly)NSString *authStateAction;
+
+- (NSString *)authStateAction;
++ (NSString *)authStateActionString:(NMBAuthState)state;
+
 + (NSString *)authStateString:(NMBAuthState)state;
+
+- (NSString *)cloudType;
+
+- (NSString *)iconName;
 
 @end

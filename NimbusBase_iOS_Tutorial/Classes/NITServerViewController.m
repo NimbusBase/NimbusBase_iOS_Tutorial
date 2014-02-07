@@ -7,12 +7,12 @@
 //
 
 #import "NITServerViewController.h"
-#import <NimbusBase/NimbusBase.h>
+#import "NimbusBase.h"
 
 #import "KVOUtilities.h"
-#import "NMBServer+UI.h"
+#import "NMBServer+NIT.h"
 
-#import "NMTBrowserViewController.h"
+#import "NITFolderViewController.h"
 
 
 static NSString *const vCellReuse = @"R";
@@ -136,9 +136,9 @@ static NSString *const kvo_authState = @"authState";
                 case 0:{
                     
                     if (authState == NMBAuthStateIn) {
-                        NMTBrowserViewController *con = [[NMTBrowserViewController alloc] init];
+                        NITFolderViewController *con = [[NITFolderViewController alloc] init];
                         con.server = server;
-                        con.file = [NMBFile root];
+                        con.file = server.root;
                         [self.navigationController pushViewController:con animated:YES];
                         ret = indexPath;
                     }
@@ -221,7 +221,7 @@ static NSString *const kvo_authState = @"authState";
     _server = server;
     
     if (_server) {
-        [_server addObserver:self forKeyPath:kvo_authState options:kvo_options context:nil];
+        [_server addObserver:self forKeyPath:kvo_authState options:kvoOptNOI context:nil];
     }
     
 }
