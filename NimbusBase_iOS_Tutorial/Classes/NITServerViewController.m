@@ -11,6 +11,8 @@
 
 #import "KVOUtilities.h"
 #import "NMBServer+NIT.h"
+#import "UITableView+Quick.h"
+#import "UIView+AutoLayout.h"
 
 #import "NITFolderViewController.h"
 
@@ -25,21 +27,17 @@ static NSString *const kvo_authState = @"authState";
 
 @implementation NITServerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (id)init{
+    if (self = [super init]) {
+        if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]) self.edgesForExtendedLayout=UIRectEdgeNone;
     }
     return self;
 }
 
 - (void)loadView{
     [super loadView];
-    
-    if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)])
-        self.edgesForExtendedLayout=UIRectEdgeNone;
-    
-    [self tableView_];
+        
+    [self tableView];
 }
 
 - (void)viewDidLoad{
@@ -50,10 +48,7 @@ static NSString *const kvo_authState = @"authState";
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    UITableView *tableView = self.tableView_;
-    [tableView.indexPathsForSelectedRows enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [tableView deselectRowAtIndexPath:obj animated:animated];
-    }];
+    [self.tableView deselectSelectedRowsAnimated:animated];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -70,7 +65,7 @@ static NSString *const kvo_authState = @"authState";
     if (object == self.server) {
         if ([keyPath isEqualToString:kvo_authState]) {
             
-            [self.tableView_ reloadRowsAtIndexPaths:
+            [self.tableView reloadRowsAtIndexPaths:
              @[[NSIndexPath indexPathForRow:0 inSection:0],
                [NSIndexPath indexPathForRow:0 inSection:1],]
                                    withRowAnimation:UITableViewRowAnimationFade
@@ -84,7 +79,6 @@ static NSString *const kvo_authState = @"authState";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     NMBServer *server = self.server;
-    NMBAuthState authState = server.authState;
     
     switch (indexPath.section) {
         case 0:{
@@ -93,7 +87,7 @@ static NSString *const kvo_authState = @"authState";
                 case 0:{
                     
                     cell.textLabel.text = @"Browser";
-                    cell.textLabel.alpha = (authState == NMBAuthStateIn) ? 1.0f : 0.5f;
+                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
 
                 }break;
                 default:
@@ -106,8 +100,10 @@ static NSString *const kvo_authState = @"authState";
             switch (indexPath.row) {
                 case 0:{
                     
+
                     cell.textLabel.text = server.authStateAction;
                     
+                    NMBAuthState authState = server.authState;
                     cell.textLabel.alpha =
                     (authState == NMBAuthStateIn || authState == NMBAuthStateOut)
                     ? 1.0f : 0.5f;
@@ -127,7 +123,6 @@ static NSString *const kvo_authState = @"authState";
     
     NSIndexPath *ret = nil;
     NMBServer *server = self.server;
-    NMBAuthState authState = server.authState;
     
     switch (indexPath.section) {
         case 0:{
@@ -135,11 +130,7 @@ static NSString *const kvo_authState = @"authState";
             switch (indexPath.row) {
                 case 0:{
                     
-                    if (authState == NMBAuthStateIn) {
-                        NITFolderViewController *con = [[NITFolderViewController alloc] init];
-                        con.server = server;
-                        con.file = server.root;
-                        [self.navigationController pushViewController:con animated:YES];
+                    if (server.isInitialized) {
                         ret = indexPath;
                     }
                     
@@ -154,12 +145,12 @@ static NSString *const kvo_authState = @"authState";
             switch (indexPath.row) {
                 case 0:{
                     
-                    switch (authState) {
+                    switch (server.authState) {
                         case NMBAuthStateIn:{
-                            [server signOut];
+                            ret = indexPath;
                         }break;
                         case NMBAuthStateOut:{
-                            [server authorizeWithController:self];
+                            ret = indexPath;
                         }break;
                         default:
                             break;
@@ -179,6 +170,56 @@ static NSString *const kvo_authState = @"authState";
     return ret;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NMBServer *server = self.server;
+    
+    switch (indexPath.section) {
+        case 0:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    if (server.isInitialized) {
+                        NITFolderViewController *con = [[NITFolderViewController alloc] init];
+                        con.server = server;
+                        con.file = server.root;
+                        [self.navigationController pushViewController:con animated:YES];
+                    }
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        case 1:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    switch (server.authState) {
+                        case NMBAuthStateIn:{
+                            [server signOut];
+                        }break;
+                        case NMBAuthStateOut:{
+                            [server authorizeWithController:self];
+                        }break;
+                        default:
+                            break;
+                    }
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        default:
+            break;
+    }
+
+}
+
 #pragma mark - UITableViewDatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -194,21 +235,25 @@ static NSString *const kvo_authState = @"authState";
 }
 
 #pragma mark - Subviews
-- (UITableView *)tableView_{
-    UITableView *tableView = self.tableView;
-    if (!tableView) {
+- (UITableView *)tableView{
+    if (!_tableView) {
         UIView *superview = self.view;
-        tableView = [[UITableView alloc] initWithFrame:superview.bounds style:UITableViewStyleGrouped];
-        tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:superview.bounds style:UITableViewStyleGrouped];
+        _tableView = tableView;
+        
         tableView.delegate = self;
         tableView.dataSource = self;
         [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:vCellReuse];
-        
+
+        tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [superview addSubview:tableView];
-        self.tableView = tableView;
+        
+        [superview addNoMarginConstraintsToSubview:tableView];
+        
     }
     
-    return tableView;
+    return _tableView;
 }
 
 #pragma mark - Models

@@ -26,6 +26,13 @@
 
 @implementation NITBaseViewController
 
+- (id)init{
+    if (self = [super init]) {
+        if([UIViewController instancesRespondToSelector:@selector(edgesForExtendedLayout)]) self.edgesForExtendedLayout=UIRectEdgeNone;
+    }
+    return self;
+}
+
 - (void)loadView{
     [super loadView];
         
