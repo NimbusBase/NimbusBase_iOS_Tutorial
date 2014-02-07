@@ -20,6 +20,7 @@
 static NSString *const vCellReuse = @"R";
 
 static NSString *const kvo_authState = @"authState";
+static NSString *const kvo_isInitialized = @"isInitialized";
 
 @interface NITServerViewController () <UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, weak)UITableView *tableView;
@@ -63,7 +64,7 @@ static NSString *const kvo_authState = @"authState";
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if (object == self.server) {
-        if ([keyPath isEqualToString:kvo_authState]) {
+        if ([keyPath isEqualToString:kvo_authState] || [keyPath isEqualToString:kvo_isInitialized]) {
             
             [self.tableView reloadRowsAtIndexPaths:
              @[[NSIndexPath indexPathForRow:0 inSection:0],
@@ -261,12 +262,14 @@ static NSString *const kvo_authState = @"authState";
     
     if (_server) {
         [_server removeObserver:self forKeyPath:kvo_authState];
+        [_server removeObserver:self forKeyPath:kvo_isInitialized];
     }
     
     _server = server;
     
     if (_server) {
         [_server addObserver:self forKeyPath:kvo_authState options:kvoOptNOI context:nil];
+        [_server addObserver:self forKeyPath:kvo_isInitialized options:kvoOptNOI context:nil];
     }
     
 }

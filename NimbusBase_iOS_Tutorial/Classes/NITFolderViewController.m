@@ -16,7 +16,7 @@
 #import "NITFileCell.h"
 #import "NITImageViewController.h"
 
-static NSString *CellIdentifier = @"Cell";
+static NSString *const vCellReuse = @"R";
 
 @interface NITFolderViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -55,13 +55,106 @@ static NSString *CellIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Network
+- (void)responsed:(NMBPromise *)promise content:(NSArray *)files{
+    [super responsed:promise content:files];
+    NSMutableArray *childrenFiles = self.childrenFiles;
+    [childrenFiles removeAllObjects];
+    [childrenFiles addObjectsFromArray:files];
+    
+    [self updateTableView];
+}
+
+- (void)failToLoadContent:(NMBPromise *)promise error:(NSError *)error{
+    NMBFile *file = promise[NKeyPrmsFile];
+    NSLog(@"An error occured during load files in folder '%@'", file.name);
+    NSLog(@"Reason: %@", error.localizedFailureReason);
+}
+
+- (void)uploadImage:(UIImage *)image named:(NSString *)name{
+    
+    NMBFileForm *form = [[NMBFileForm alloc] init];
+    form.name = name;
+    form.mime = @"image/png";
+    form.content = UIImagePNGRepresentation(image);
+    
+    __weak typeof(self) bSelf = self;
+    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
+    [[[promise success:^(NMBPromise *promise, NMBFile *file) {
+        
+        [bSelf.childrenFiles addObject:file];
+        [bSelf updateTableView];
+        
+    }] fail:^(NMBPromise *promise, NSError *error) {
+        
+        NSLog(@"%@", error.userInfo);
+        
+    }] response:^(NMBPromise *promise, NSDictionary *userInfo, NSError *error) {
+        
+        bSelf.pickedImage = nil;
+        bSelf.promise = nil;
+        
+    }];
+    
+    self.promise = promise;
+    [promise go];
+}
+
+- (void)createFolderNamed:(NSString *)name{
+    
+    NMBFileForm *form = [NMBFileForm folderWithName:name];
+    
+    __weak typeof(self) bSelf = self;
+    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
+    [[[promise success:^(NMBPromise *promise, NMBFile *file) {
+        
+        [bSelf.childrenFiles addObject:file];
+        [bSelf updateTableView];
+        
+    }] fail:^(NMBPromise *promise, NSError *error) {
+        
+        NSLog(@"%@", error.userInfo);
+        
+    }] response:^(NMBPromise *promise, NSDictionary *userInfo, NSError *error) {
+        
+        bSelf.promise = nil;
+        
+    }];
+    
+    self.promise = promise;
+    [promise go];
+}
+
+- (void)deleteFile:(NMBFile *)file atIndexPath:(NSIndexPath *)indexPath{
+    __weak typeof(self) bSelf = self;
+    NMBPromise *promise = [self.server deleteFile:file];
+    [[[promise success:^(NMBPromise *promise, NSDictionary *userInfo) {
+        
+        NMBFile *file = promise[NKeyPrmsFile];
+        [bSelf.childrenFiles removeObject:file];
+        [bSelf updateTableView];
+        
+    }] fail:^(NMBPromise *promise, NSError *error) {
+        
+        NSLog(@"%@", error.localizedFailureReason);
+        
+    }] response:^(NMBPromise *promise, id response, NSError *error) {
+        
+        bSelf.promise = nil;
+        
+    }];
+    
+    self.promise = promise;
+    [promise go];
+}
+
 #pragma mark - TableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.childrenFiles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NITFileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NITFileCell *cell = [tableView dequeueReusableCellWithIdentifier:vCellReuse forIndexPath:indexPath];
     return cell;
 }
 
@@ -117,7 +210,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIImage *image = [info valueForKey:UIImagePickerControllerEditedImage];
+    UIImage *image = info[(picker.allowsEditing ? UIImagePickerControllerEditedImage : UIImagePickerControllerOriginalImage)];
     
     self.pickedImage = image;
     
@@ -178,111 +271,42 @@ static NSString *CellIdentifier = @"Cell";
     [self.tableView reloadData];
 }
 
-#pragma mark - Network
-- (void)contentResponse:(NSArray *)files{
-    
-    NSMutableArray *childrenFiles = self.childrenFiles;
-    [childrenFiles removeAllObjects];
-    [childrenFiles addObjectsFromArray:files];
-    
-    [self updateTableView];
-    
-}
-
-- (void)uploadImage:(UIImage *)image named:(NSString *)name{
-    
-    NMBFileForm *form = [[NMBFileForm alloc] init];
-    form.name = name;
-    form.mime = @"image/png";
-    form.content = UIImagePNGRepresentation(image);
-    
-    __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
-    [[[promise success:^(NMBPromise *promise, NMBFile *file) {
-        
-        [bSelf.childrenFiles addObject:file];
-        [bSelf updateTableView];
-        
-    }] fail:^(NMBPromise *promise, NSError *error) {
-        
-        NSLog(@"%@", error.userInfo);
-        
-    }] response:^(NMBPromise *promise, NSDictionary *userInfo, NSError *error) {
-        
-        bSelf.pickedImage = nil;
-        bSelf.promise = nil;
-        
-    }];
-    
-    self.promise = promise;
-    [promise go];
-}
-
-- (void)createFolderNamed:(NSString *)name{
-    
-    NMBFileForm *form = [NMBFileForm folderWithName:name];
-    
-    __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
-    [[[promise success:^(NMBPromise *promise, NMBFile *file) {
-        
-        [bSelf.childrenFiles addObject:file];
-        [bSelf updateTableView];
-        
-    }] fail:^(NMBPromise *promise, NSError *error) {
-        
-        NSLog(@"%@", error.userInfo);
-    
-    }] response:^(NMBPromise *promise, NSDictionary *userInfo, NSError *error) {
-        
-        bSelf.promise = nil;
-        
-    }];
-    
-    self.promise = promise;
-    [promise go];
-}
-
-- (void)deleteFile:(NMBFile *)file atIndexPath:(NSIndexPath *)indexPath{
-    __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server deleteFile:file];
-    [[[promise success:^(NMBPromise *promise, NSDictionary *userInfo) {
-        
-        NMBFile *file = promise[NKeyPrmsFile];
-        [bSelf.childrenFiles removeObject:file];
-        [bSelf updateTableView];
-        
-    }] fail:^(NMBPromise *promise, NSError *error) {
-        
-        NSLog(@"%@", error.localizedFailureReason);
-    
-    }] response:^(NMBPromise *promise, id response, NSError *error) {
-        
-        bSelf.promise = nil;
-    
-    }];
-    
-    self.promise = promise;
-    [promise go];
-}
-
-
 #pragma mark - Subviews
 - (void)configNavigationItems{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    UINavigationItem *item = self.navigationItem;
-    
-    item.rightBarButtonItem = [[UIBarButtonItem alloc]
-                               initWithTitle:@"Add"
-                               style:UIBarButtonItemStyleBordered
-                               target:self
-                               action:@selector(tapButton:)];
-    
+    [self setupEditButton:YES];
 }
 
-- (void)resetEditButton{
-    [super resetEditButton];
-    self.navigationItem.rightBarButtonItem.title = @"Add";
+- (void)setupEditButton:(BOOL)isActive{
+    UINavigationItem *item = self.navigationItem;
+    
+    if (isActive) {
+        
+        UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activity startAnimating];
+        UIBarButtonItem *button = [[UIBarButtonItem alloc]
+                                   initWithCustomView:activity];
+        button.enabled = NO;
+        
+        item.rightBarButtonItems = nil;
+        item.rightBarButtonItem = button;
+        
+    } else {
+        
+        UIBarButtonItem *folder = [[UIBarButtonItem alloc]
+                                   initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                   target:self
+                                   action:@selector(tapNavigationBarButton:)];
+        
+        UIBarButtonItem *image = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemCamera
+                                  target:self
+                                  action:@selector(tapNavigationBarButton:)];
+        
+        item.rightBarButtonItem = nil;
+        item.rightBarButtonItems = @[self.addButtonImage = image,
+                                     self.addButtonFolder = folder,];
+        
+    }
 }
 
 - (UITableView *)tableView{
@@ -294,7 +318,8 @@ static NSString *CellIdentifier = @"Cell";
         
         tableView.delegate = self;
         tableView.dataSource = self;
-        
+        [tableView registerClass:[NITFileCell class] forCellReuseIdentifier:vCellReuse];
+
         tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [superview addSubview:tableView];
         
@@ -313,6 +338,5 @@ static NSString *CellIdentifier = @"Cell";
     
     return _childrenFiles;
 }
-
 
 @end

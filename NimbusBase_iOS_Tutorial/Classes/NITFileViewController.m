@@ -14,6 +14,7 @@
 @end
 
 @implementation NITFileViewController
+@synthesize promise = _promise;
 
 - (id)init{
     if (self = [super init]) {

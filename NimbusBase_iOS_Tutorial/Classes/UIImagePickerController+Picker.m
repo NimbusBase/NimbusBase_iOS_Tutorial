@@ -27,6 +27,9 @@
     cameraUI.sourceType = sourceType;
     cameraUI.mediaTypes = @[(NSString *)kUTTypeImage];
     cameraUI.delegate = controller;
+    
+    [controller presentViewController:cameraUI animated:YES completion:nil];
+
 }
 
 @end

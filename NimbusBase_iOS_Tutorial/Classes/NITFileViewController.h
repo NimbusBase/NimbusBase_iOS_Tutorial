@@ -10,7 +10,9 @@
 
 @class NMBFile, NMBServer, NMBPromise;
 
-@interface NITFileViewController : UIViewController
+@interface NITFileViewController : UIViewController {
+    __weak NMBPromise *_promise;
+}
 
 @property(nonatomic, strong)NMBFile* file;
 @property(nonatomic, weak)NMBServer *server;
