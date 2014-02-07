@@ -22,26 +22,26 @@
 }
 
 + (NSDictionary *)configs{
-    static NSString *const kAppName = @"YourAppName";
+    static NSString *const kAppName = @"Nimbus iOS Tutorial";
     return @{
              NCfgK_Servers: @[
                      @{
                          NCfgK_AppName: kAppName,
                          NCfgK_Cloud: NCfgV_GDrive,
-                         NCfgK_AppID: @"573163675535-5nj0q1t3lspohv5dj9bhg1b70a4ihbqh.apps.googleusercontent.com",
-                         NCfgK_AppSecret: @"Jkkel_Z8XLO8ecND5sCX5uBq",
+                         NCfgK_AppID: @"467471168650-9v08j5mruji6gcskp2ovam903o6g6nsc.apps.googleusercontent.com",
+                         NCfgK_AppSecret: @"HgyksCpZ9g7m2wdOJHbB0tOs",
                          },
                      @{
                          NCfgK_AppName: kAppName,
                          NCfgK_Cloud: NCfgV_Dropbox,
-                         NCfgK_AppID: @"vl4r226lxo4dok1",
-                         NCfgK_AppSecret: @"b9d86w0aekl18ly",
+                         NCfgK_AppID: @"x0e7vb4ls3lub5d",
+                         NCfgK_AppSecret: @"jl1xp49sumwe7tf",
                          },
                      @{
                          NCfgK_AppName: kAppName,
                          NCfgK_Cloud: NCfgV_Box,
-                         NCfgK_AppID: @"eaofybj13ha01qnx4cea2auowdnvwnwc",
-                         NCfgK_AppSecret: @"sTARCW3Asza5ZORLst1Ni2GjrhwlR66p",
+                         NCfgK_AppID: @"eky66lnq5fnlmulhos7080u1c4a2isv2",
+                         NCfgK_AppSecret: @"6bMkjEzGKU1ghcmXbCii32ykGHJp4xZT",
                          },
                      ]
              };
