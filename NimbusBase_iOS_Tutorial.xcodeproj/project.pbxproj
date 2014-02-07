@@ -474,7 +474,7 @@
 					"\"$(SRCROOT)/Venders/NimbusBase\"",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjeC",
+					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -495,7 +495,7 @@
 					"\"$(SRCROOT)/Venders/NimbusBase\"",
 				);
 				OTHER_LDFLAGS = (
-					"-ObjeC",
+					"-ObjC",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -564,6 +564,7 @@
 				BEAC206A18A385AF00BBC60E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BEAC206B18A385AF00BBC60E /* Build configuration list for PBXNativeTarget "NimbusBase_iOS_TutorialTests" */ = {
 			isa = XCConfigurationList;
@@ -572,6 +573,7 @@
 				BEAC206D18A385AF00BBC60E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
