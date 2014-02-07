@@ -29,6 +29,13 @@
 		BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC209818A38F1300BBC60E /* NMBase+NIT.m */; };
 		BEAC20CE18A391C400BBC60E /* libNimbusBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC20CB18A391C400BBC60E /* libNimbusBase.a */; };
 		BEAC20CF18A391C400BBC60E /* NimbusBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */; };
+		BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4406B18A4827A00CF839A /* NITBaseViewController.m */; };
+		BEB4407418A4832B00CF839A /* NMBServer+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4406F18A4832B00CF839A /* NMBServer+NIT.m */; };
+		BEB4407518A4832B00CF839A /* NITServerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407118A4832B00CF839A /* NITServerCell.m */; };
+		BEB4407618A4832B00CF839A /* NITServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407318A4832B00CF839A /* NITServerViewController.m */; };
+		BEB4408018A4840800CF839A /* NITFolderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407B18A4840800CF839A /* NITFolderViewController.m */; };
+		BEB4408118A4840800CF839A /* NITFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407D18A4840800CF839A /* NITFileViewController.m */; };
+		BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4407F18A4840800CF839A /* NITImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +88,21 @@
 		BEAC20CA18A391C400BBC60E /* NMBServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBServer.h; sourceTree = "<group>"; };
 		BEAC20CB18A391C400BBC60E /* libNimbusBase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libNimbusBase.a; sourceTree = "<group>"; };
 		BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NimbusBaseResources.bundle; sourceTree = "<group>"; };
+		BEB4406A18A4827A00CF839A /* NITBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITBaseViewController.h; sourceTree = "<group>"; };
+		BEB4406B18A4827A00CF839A /* NITBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITBaseViewController.m; sourceTree = "<group>"; };
+		BEB4406D18A482DE00CF839A /* KVOUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVOUtilities.h; sourceTree = "<group>"; };
+		BEB4406E18A4832B00CF839A /* NMBServer+NIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+NIT.h"; sourceTree = "<group>"; };
+		BEB4406F18A4832B00CF839A /* NMBServer+NIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NMBServer+NIT.m"; sourceTree = "<group>"; };
+		BEB4407018A4832B00CF839A /* NITServerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITServerCell.h; sourceTree = "<group>"; };
+		BEB4407118A4832B00CF839A /* NITServerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITServerCell.m; sourceTree = "<group>"; };
+		BEB4407218A4832B00CF839A /* NITServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITServerViewController.h; sourceTree = "<group>"; };
+		BEB4407318A4832B00CF839A /* NITServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITServerViewController.m; sourceTree = "<group>"; };
+		BEB4407A18A4840800CF839A /* NITFolderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITFolderViewController.h; sourceTree = "<group>"; };
+		BEB4407B18A4840800CF839A /* NITFolderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITFolderViewController.m; sourceTree = "<group>"; };
+		BEB4407C18A4840800CF839A /* NITFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITFileViewController.h; sourceTree = "<group>"; };
+		BEB4407D18A4840800CF839A /* NITFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITFileViewController.m; sourceTree = "<group>"; };
+		BEB4407E18A4840800CF839A /* NITImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NITImageViewController.h; sourceTree = "<group>"; };
+		BEB4407F18A4840800CF839A /* NITImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NITImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +217,10 @@
 		BEAC207918A38B2100BBC60E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC209718A38F1300BBC60E /* NMBase+NIT.h */,
-				BEAC209818A38F1300BBC60E /* NMBase+NIT.m */,
+				BEB4407818A4834700CF839A /* Base */,
+				BEB4407718A4833B00CF839A /* Server */,
+				BEB4407918A483FC00CF839A /* File */,
+				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -245,6 +269,43 @@
 				BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		BEB4407718A4833B00CF839A /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				BEB4407218A4832B00CF839A /* NITServerViewController.h */,
+				BEB4407318A4832B00CF839A /* NITServerViewController.m */,
+				BEB4407018A4832B00CF839A /* NITServerCell.h */,
+				BEB4407118A4832B00CF839A /* NITServerCell.m */,
+				BEB4406E18A4832B00CF839A /* NMBServer+NIT.h */,
+				BEB4406F18A4832B00CF839A /* NMBServer+NIT.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		BEB4407818A4834700CF839A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BEB4406A18A4827A00CF839A /* NITBaseViewController.h */,
+				BEB4406B18A4827A00CF839A /* NITBaseViewController.m */,
+				BEAC209718A38F1300BBC60E /* NMBase+NIT.h */,
+				BEAC209818A38F1300BBC60E /* NMBase+NIT.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		BEB4407918A483FC00CF839A /* File */ = {
+			isa = PBXGroup;
+			children = (
+				BEB4407A18A4840800CF839A /* NITFolderViewController.h */,
+				BEB4407B18A4840800CF839A /* NITFolderViewController.m */,
+				BEB4407C18A4840800CF839A /* NITFileViewController.h */,
+				BEB4407D18A4840800CF839A /* NITFileViewController.m */,
+				BEB4407E18A4840800CF839A /* NITImageViewController.h */,
+				BEB4407F18A4840800CF839A /* NITImageViewController.m */,
+			);
+			name = File;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,10 +405,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEB4407418A4832B00CF839A /* NMBServer+NIT.m in Sources */,
+				BEB4407618A4832B00CF839A /* NITServerViewController.m in Sources */,
+				BEB4408118A4840800CF839A /* NITFileViewController.m in Sources */,
 				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
 				BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
+				BEB4407518A4832B00CF839A /* NITServerCell.m in Sources */,
 				BEAC204818A385AF00BBC60E /* main.m in Sources */,
+				BEB4408018A4840800CF839A /* NITFolderViewController.m in Sources */,
+				BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */,
 				BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */,
+				BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,6 +537,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Venders/NimbusBase\"",
@@ -490,6 +559,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Venders/NimbusBase\"",
