@@ -11,8 +11,4 @@
 @class NMBFile, NMBServer;
 
 @interface NITFolderViewController : NITFileViewController
-
-@property(nonatomic, strong)NMBFile* file;
-@property(nonatomic, weak)NMBServer *server;
-
 @end

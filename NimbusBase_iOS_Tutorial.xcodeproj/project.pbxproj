@@ -310,10 +310,10 @@
 		BEB4407918A483FC00CF839A /* File */ = {
 			isa = PBXGroup;
 			children = (
-				BEB4407A18A4840800CF839A /* NITFolderViewController.h */,
-				BEB4407B18A4840800CF839A /* NITFolderViewController.m */,
 				BEB4407C18A4840800CF839A /* NITFileViewController.h */,
 				BEB4407D18A4840800CF839A /* NITFileViewController.m */,
+				BEB4407A18A4840800CF839A /* NITFolderViewController.h */,
+				BEB4407B18A4840800CF839A /* NITFolderViewController.m */,
 				BEB4407E18A4840800CF839A /* NITImageViewController.h */,
 				BEB4407F18A4840800CF839A /* NITImageViewController.m */,
 				BEB4408618A4888E00CF839A /* NITFileCell.h */,

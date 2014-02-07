@@ -35,15 +35,15 @@
 
 - (void)loadView{
     [super loadView];
-        
-    [self tableView];
+    
+    self.tableView = self.tableView;
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    [self servers];
+    self.servers = self.servers;
 }
 
 - (void)viewDidAppear:(BOOL)animated{

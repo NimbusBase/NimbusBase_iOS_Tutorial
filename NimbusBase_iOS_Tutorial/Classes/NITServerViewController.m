@@ -36,8 +36,8 @@ static NSString *const kvo_authState = @"authState";
 
 - (void)loadView{
     [super loadView];
-        
-    [self tableView];
+    
+    self.tableView = self.tableView;
 }
 
 - (void)viewDidLoad{

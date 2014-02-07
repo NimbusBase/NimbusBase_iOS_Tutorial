@@ -18,7 +18,9 @@
 @property(nonatomic, weak)NMBPromise *promise;
 
 - (void)requestContent;
-- (void)contentResponse:(id)content;
-- (void)resetEditButton;
+- (void)responsed:(NMBPromise *)promise content:(id)content;
+- (void)failToLoadContent:(NMBPromise *)promise error:(NSError *)error;
+- (void)confirmFailToLoadContent;
+- (void)setupEditButton:(BOOL)isActive;
 
 @end

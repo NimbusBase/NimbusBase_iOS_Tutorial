@@ -14,23 +14,19 @@
 + (void)showFromController:(UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate> *)controller{
     
     UIImagePickerController *cameraUI = [[UIImagePickerController alloc] init];
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        
-        cameraUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
-    } else {
+    
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         // In case we're running the iPhone simulator, fall back on the photo library instead.
-        cameraUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             return;
         }
     }
     
+    cameraUI.sourceType = sourceType;
     cameraUI.mediaTypes = @[(NSString *)kUTTypeImage];
-    cameraUI.allowsEditing = YES;
     cameraUI.delegate = controller;
-    [controller presentViewController:cameraUI animated:YES completion:nil];
-
 }
 
 @end
