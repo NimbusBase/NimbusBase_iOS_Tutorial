@@ -8,8 +8,8 @@
 
 #import "NMBConfigurableObject.h"
 
+/**
+ * NMBServer represents an app of Google Drive, Dropbox or Box.
+ */
 @interface NMBServer : NMBConfigurableObject
-
-+ (id)serverConfigs:(NSDictionary *)cfgs;
-
 @end
