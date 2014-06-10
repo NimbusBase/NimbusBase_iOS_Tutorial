@@ -15,8 +15,8 @@
     static dispatch_once_t once;
     static NMBase *base;
     dispatch_once(&once, ^{
-        NSManagedObjectContext *ctx = [(NITAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
-        base = [[NMBase alloc] initWithMOContext:ctx configs:self.configs];
+        
+        base = [[NMBase alloc] initWithPSCoordinator:nil configs:self.configs];
     });
     return base;
 }

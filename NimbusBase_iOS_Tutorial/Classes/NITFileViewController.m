@@ -55,8 +55,10 @@
 #pragma mark - Events
 - (void)requestContent{
     
+    NMBServer *server = self.server;
+    NMBPromise *promise = [server retrieveFile:self.file];
+
     __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server retrieveFile:self.file];
     [[[promise success:^(NMBPromise *promise, id response) {
         
         [bSelf responsed:promise content:response];
@@ -72,7 +74,7 @@
     }];
     
     self.promise = promise;
-    [promise go];
+    [server firePromise:promise];
 }
 
 - (void)responsed:(NMBPromise *)promise content:(id)content{

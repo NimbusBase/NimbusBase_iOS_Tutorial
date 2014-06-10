@@ -7,7 +7,6 @@
 //
 
 #import "NMBObject.h"
-#import "NMBConstants.h"
 
 
 @class NMBFileForm;
@@ -17,53 +16,49 @@
  */
 @interface NMBFile : NMBObject
 
-#pragma mark - Root
-/**
- * @brief Indicates if the file represents the root folder of the app.
- */
-@property(nonatomic, readonly)BOOL isRoot;
-
 #pragma mark - Meta
+
 /**
  * @brief The identifier of the file.
  */
-@property(nonatomic, copy, readonly)NSString *identifier;
+@property(nonatomic, readonly, copy)NSString *identifier;
 
 /**
  * @brief The name of the file.
  */
-@property(nonatomic, copy, readonly)NSString *name;
+@property(nonatomic, readonly, copy)NSString *name;
 
 /**
  * @brief The mime of the file.
  */
-@property(nonatomic, copy, readonly)NSString *mime;
-
-/**
- * @brief The content of the file. If the file represents a folder, this property will be nil.
- */
-@property(nonatomic, copy, readonly)NSData *content;
+@property(nonatomic, readonly, copy)NSString *mime;
 
 /**
  * @brief The last modified date of the file.
  */
-@property(nonatomic, copy, readonly)NSDate *modifiedDate;
+@property(nonatomic, readonly, copy)NSDate *modifiedDate;
+
+/**
+ * @brief The content of the file. If the file represents a folder, this property will be nil.
+ */
+@property(nonatomic, readonly, copy)NSData *content;
 
 /**
  * @brief The extension of the file
  */
-@property(nonatomic, readonly)NSString *extension;
+@property(nonatomic, readonly, copy)NSString *extension;
 
 /**
  * @brief Indicates if the file represents a folder.
  */
-@property(nonatomic, assign, readonly)BOOL isFolder;
+@property(nonatomic, readonly)BOOL isFolder;
 
 #pragma mark - Disk
+
 /**
  * @brief If the file has been retrieved, this property indicates the url of the content on disk.
  */
-@property(nonatomic, readonly)NSURL *urlOnDisk;
+@property(nonatomic, readonly, copy)NSURL *urlOnDisk;
 
 /**
  * @brief Indicates if content exist on disk.

@@ -52,14 +52,27 @@
 /**
  * @brief The convenient method to new a NMBFileForm represents a folder.
  * 
- *@param name The name of the folder.
+ * @param name The name of the folder.
  */
 + (id)folderWithName:(NSString *)name;
 
+/**
+ * @brief If the file content you want to upload is on the disk, you can use this method to avoid unnecessary memory cost.
+ *
+ * @param fromURL The file url of the content on the disk.
+ *
+ * @return Whether the file content is successfully to be set.
+ */
+- (BOOL)setContentViaURL:(NSURL *)fromURL;
+
 #pragma mark - Disk
+
 /**
  * @brief When you set the property content, it will be serialized on disk. This property indicates the url of the serialized data.
+ *
+ * @see content
+ * @see setContentViaURL:
  */
-@property(nonatomic, copy, readonly)NSURL *urlOnDisk;
+@property(nonatomic, readonly, copy)NSURL *urlOnDisk;
 
 @end

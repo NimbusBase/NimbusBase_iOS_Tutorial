@@ -78,8 +78,10 @@ static NSString *const vCellReuse = @"R";
     form.mime = @"image/png";
     form.content = UIImagePNGRepresentation(image);
     
+    NMBServer *server = self.server;
+    NMBPromise *promise = [server createFileWithForm:form inParent:self.file];
+    
     __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
     [[[promise success:^(NMBPromise *promise, NMBFile *file) {
         
         [bSelf.childrenFiles addObject:file];
@@ -97,15 +99,17 @@ static NSString *const vCellReuse = @"R";
     }];
     
     self.promise = promise;
-    [promise go];
+    [server firePromise:promise];
 }
 
 - (void)createFolderNamed:(NSString *)name{
     
     NMBFileForm *form = [NMBFileForm folderWithName:name];
     
+    NMBServer *server = self.server;
+    NMBPromise *promise = [server createFileWithForm:form inParent:self.file];
+
     __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server createFileWithForm:form inParent:self.file];
     [[[promise success:^(NMBPromise *promise, NMBFile *file) {
         
         [bSelf.childrenFiles addObject:file];
@@ -122,12 +126,15 @@ static NSString *const vCellReuse = @"R";
     }];
     
     self.promise = promise;
-    [promise go];
+    [server firePromise:promise];
 }
 
 - (void)deleteFile:(NMBFile *)file atIndexPath:(NSIndexPath *)indexPath{
+    
+    NMBServer *server = self.server;
+    NMBPromise *promise = [server deleteFile:file];
+    
     __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server deleteFile:file];
     [[[promise success:^(NMBPromise *promise, NSDictionary *userInfo) {
         
         NMBFile *file = promise[NKeyPrmsFile];
@@ -145,7 +152,7 @@ static NSString *const vCellReuse = @"R";
     }];
     
     self.promise = promise;
-    [promise go];
+    [server firePromise:promise];
 }
 
 #pragma mark - TableViewDataSource
