@@ -51,8 +51,10 @@ static NSString *const kvo_progress = @"progress";
     NMBFileForm *form = [[NMBFileForm alloc] initWithFile:file];
     form.content = UIImagePNGRepresentation(image);
     
+    NMBServer *server = self.server;
+    NMBPromise *promise = [server updateFile:file withForm:form];
+
     __weak typeof(self) bSelf = self;
-    NMBPromise *promise = [self.server updateFile:file withForm:form];
     [[[promise success:^(NMBPromise *promise, NMBFile *file) {
         
         bSelf.imageView.image = [[UIImage alloc] initWithData:file.content];
@@ -67,7 +69,7 @@ static NSString *const kvo_progress = @"progress";
     }];
     
     self.promise = promise;
-    [promise go];
+    [server firePromise:promise];
 }
 
 #pragma mark - KVO

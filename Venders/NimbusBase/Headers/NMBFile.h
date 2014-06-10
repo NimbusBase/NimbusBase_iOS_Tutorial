@@ -7,36 +7,62 @@
 //
 
 #import "NMBObject.h"
-#import "NMBConstants.h"
 
 
 @class NMBFileForm;
 
+/**
+ * NMBFile represents a file on cloud. You should never create an instance of it by yourself, they are always returned by instance of NMBServer. NimbusBase regards folder as file too. The difference is in the callback of retrieving a file, you get instance of NSData as response, but in callback of retrieving folder you get instance of NSArray, which contains its children.
+ */
 @interface NMBFile : NMBObject
 
-#pragma mark - Cloud File
-- (id)initWithCloudFile:(id)cloudFile;
-- (id)initWithCloudFile:(id)cloudFile form:(NMBFileForm *)form;
-- (void)updateWithCloudFile:(id)cloudFile;
-- (void)updateWithCloudFile:(id)cloudFile form:(NMBFileForm *)form;
-
-#pragma mark - Root
-@property(nonatomic, readonly)BOOL isRoot;
-
 #pragma mark - Meta
-@property(nonatomic, copy, readonly)NSString *identifier;
-@property(nonatomic, copy, readonly)NSString *name;
-@property(nonatomic, copy, readonly)NSString *mime;
-@property(nonatomic, copy, readonly)NSData *content;
-@property(nonatomic, copy, readonly)NSDate *modifiedDate;
-@property(nonatomic, readonly)NSString *extension;
 
-#pragma mark - Mime type
-@property(nonatomic, assign, readonly)BOOL isFolder;
-+ (NSString *)mimeWithCloudFile:(id)cloudFile;
+/**
+ * @brief The identifier of the file.
+ */
+@property(nonatomic, readonly, copy)NSString *identifier;
+
+/**
+ * @brief The name of the file.
+ */
+@property(nonatomic, readonly, copy)NSString *name;
+
+/**
+ * @brief The mime of the file.
+ */
+@property(nonatomic, readonly, copy)NSString *mime;
+
+/**
+ * @brief The last modified date of the file.
+ */
+@property(nonatomic, readonly, copy)NSDate *modifiedDate;
+
+/**
+ * @brief The content of the file. If the file represents a folder, this property will be nil.
+ */
+@property(nonatomic, readonly, copy)NSData *content;
+
+/**
+ * @brief The extension of the file
+ */
+@property(nonatomic, readonly, copy)NSString *extension;
+
+/**
+ * @brief Indicates if the file represents a folder.
+ */
+@property(nonatomic, readonly)BOOL isFolder;
 
 #pragma mark - Disk
-@property(nonatomic, readonly)NSURL *urlOnDisk;
+
+/**
+ * @brief If the file has been retrieved, this property indicates the url of the content on disk.
+ */
+@property(nonatomic, readonly, copy)NSURL *urlOnDisk;
+
+/**
+ * @brief Indicates if content exist on disk.
+ */
 @property(nonatomic, readonly)BOOL contentExists;
 
 @end

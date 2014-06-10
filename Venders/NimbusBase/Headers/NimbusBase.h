@@ -15,6 +15,7 @@
 #import "NMBServer.h"
 #import "NMBServer+Auth.h"
 #import "NMBServer+Client.h"
+#import "NMBServer+Sync.h"
 #import "NMBFile.h"
 #import "NMBFileForm.h"
 #import "NMBPromise.h"
