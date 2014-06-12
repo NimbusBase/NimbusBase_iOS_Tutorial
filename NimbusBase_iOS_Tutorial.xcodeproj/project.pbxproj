@@ -53,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE4ACF7619497B0900DF060B /* NMBSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBSerializer.h; sourceTree = "<group>"; };
+		BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Sync.h"; sourceTree = "<group>"; };
 		BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbusBase_iOS_Tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAC203918A385AF00BBC60E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -258,6 +260,8 @@
 		BEAC20BD18A391C400BBC60E /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BE4ACF7619497B0900DF060B /* NMBSerializer.h */,
+				BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */,
 				BEAC20BE18A391C400BBC60E /* NimbusBase.h */,
 				BEAC20BF18A391C400BBC60E /* NMBase.h */,
 				BEAC20C018A391C400BBC60E /* NMBConfigs.h */,
