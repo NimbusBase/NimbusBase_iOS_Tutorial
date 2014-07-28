@@ -18,7 +18,7 @@
         
         NITAppDelegate *appDelegate = (NITAppDelegate *)[[UIApplication sharedApplication] delegate];
         
-        base = [[NMBase alloc] initWithPSCoordinator:nil
+        base = [[NMBase alloc] initWithPSCoordinator:appDelegate.persistentStoreCoordinator
                                              configs:self.configs];
         
         [base trackChangesOfMOContext:appDelegate.managedObjectContext];
