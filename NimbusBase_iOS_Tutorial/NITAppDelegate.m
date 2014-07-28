@@ -17,13 +17,21 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[NITBaseViewController alloc] init]];
-
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+    // NimbusBase
+    
+    NMBase *base = [NMBase sharedBase];
+    [base trackChangesOfMOContext:self.managedObjectContext];
+    
+    // UI
+    
+    UIWindow *window = self.window;
+    window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[NITBaseViewController alloc] init]];
+    window.backgroundColor = [UIColor whiteColor];
+    [window makeKeyAndVisible];
     
     return YES;
 }
@@ -51,21 +59,41 @@
     [self saveContext];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [[NMBase sharedBase] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
+#pragma mark - Database
+
 - (void)saveContext{
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
-        } 
+        }
     }
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return [[NMBase sharedBase] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+- (void)mergeNMBMOContextWithNotification:(NSNotification *)notification
+{
+    if (![NSThread isMainThread]) {
+        [self performSelectorOnMainThread:@selector(mergeNMBMOContextWithNotification:)
+                               withObject:notification
+                            waitUntilDone:NO];
+        return;
+    }
+    
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+}
+
+- (void)handleNMBUserContextSaveErrorNotification:(NSNotification *)notification
+{
+    NSError *error = notification.userInfo[NKeyNotiError];
+    NSLog(@"%@", error);
 }
 
 #pragma mark - Core Data stack

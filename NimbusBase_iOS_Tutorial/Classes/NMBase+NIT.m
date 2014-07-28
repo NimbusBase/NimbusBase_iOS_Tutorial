@@ -16,7 +16,24 @@
     static NMBase *base;
     dispatch_once(&once, ^{
         
-        base = [[NMBase alloc] initWithPSCoordinator:nil configs:self.configs];
+        NITAppDelegate *appDelegate = (NITAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        base = [[NMBase alloc] initWithPSCoordinator:appDelegate.persistentStoreCoordinator
+                                             configs:self.configs];
+        
+        NSManagedObjectContext *nmbMOC = base.userMOContext;
+        
+        NSNotificationCenter *noti = [NSNotificationCenter defaultCenter];
+        [noti addObserver:appDelegate
+                 selector:@selector(mergeNMBMOContextWithNotification:)
+                     name:NSManagedObjectContextDidSaveNotification
+                   object:nmbMOC];
+        
+        [noti addObserver:appDelegate
+                 selector:@selector(handleNMBUserContextSaveErrorNotification:)
+                     name:NMBNotiUserContextSaveError
+                   object:base];
+
     });
     return base;
 }

@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE21705519862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE21705319862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld */; };
+		BE21708C1986372200D0A232 /* NMTPlaygroundImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21708B1986372200D0A232 /* NMTPlaygroundImagePickerController.m */; };
+		BE2170A11986377100D0A232 /* NCUAttributeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170901986377100D0A232 /* NCUAttributeViewCell.m */; };
+		BE2170A21986377100D0A232 /* NCUController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170921986377100D0A232 /* NCUController.m */; };
+		BE2170A31986377100D0A232 /* NCUEntityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170941986377100D0A232 /* NCUEntityViewController.m */; };
+		BE2170A41986377100D0A232 /* NCUModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170961986377100D0A232 /* NCUModelViewController.m */; };
+		BE2170A51986377100D0A232 /* NCUObjectCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170981986377100D0A232 /* NCUObjectCreatorViewController.m */; };
+		BE2170A61986377100D0A232 /* NCUObjectPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21709A1986377100D0A232 /* NCUObjectPickerViewController.m */; };
+		BE2170A71986377100D0A232 /* NCUObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21709C1986377100D0A232 /* NCUObjectViewController.m */; };
+		BE2170A81986377100D0A232 /* NSManagedObject+NCU.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21709E1986377100D0A232 /* NSManagedObject+NCU.m */; };
+		BE2170A91986377100D0A232 /* NSPropertyDescription+NCU.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */; };
 		BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
 		BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */; };
 		BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203D18A385AF00BBC60E /* UIKit.framework */; };
@@ -14,7 +25,6 @@
 		BEAC204618A385AF00BBC60E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAC204418A385AF00BBC60E /* InfoPlist.strings */; };
 		BEAC204818A385AF00BBC60E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204718A385AF00BBC60E /* main.m */; };
 		BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */; };
-		BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */; };
 		BEAC205118A385AF00BBC60E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEAC205018A385AF00BBC60E /* Images.xcassets */; };
 		BEAC205818A385AF00BBC60E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC205718A385AF00BBC60E /* XCTest.framework */; };
 		BEAC205918A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
@@ -53,6 +63,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE21705419862B0F00D0A232 /* NimbusTester.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NimbusTester.xcdatamodel; sourceTree = "<group>"; };
+		BE21708A1986372200D0A232 /* NMTPlaygroundImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMTPlaygroundImagePickerController.h; sourceTree = "<group>"; };
+		BE21708B1986372200D0A232 /* NMTPlaygroundImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NMTPlaygroundImagePickerController.m; sourceTree = "<group>"; };
+		BE21708F1986377100D0A232 /* NCUAttributeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUAttributeViewCell.h; sourceTree = "<group>"; };
+		BE2170901986377100D0A232 /* NCUAttributeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUAttributeViewCell.m; sourceTree = "<group>"; };
+		BE2170911986377100D0A232 /* NCUController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUController.h; sourceTree = "<group>"; };
+		BE2170921986377100D0A232 /* NCUController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUController.m; sourceTree = "<group>"; };
+		BE2170931986377100D0A232 /* NCUEntityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUEntityViewController.h; sourceTree = "<group>"; };
+		BE2170941986377100D0A232 /* NCUEntityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUEntityViewController.m; sourceTree = "<group>"; };
+		BE2170951986377100D0A232 /* NCUModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUModelViewController.h; sourceTree = "<group>"; };
+		BE2170961986377100D0A232 /* NCUModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUModelViewController.m; sourceTree = "<group>"; };
+		BE2170971986377100D0A232 /* NCUObjectCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUObjectCreatorViewController.h; sourceTree = "<group>"; };
+		BE2170981986377100D0A232 /* NCUObjectCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUObjectCreatorViewController.m; sourceTree = "<group>"; };
+		BE2170991986377100D0A232 /* NCUObjectPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUObjectPickerViewController.h; sourceTree = "<group>"; };
+		BE21709A1986377100D0A232 /* NCUObjectPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUObjectPickerViewController.m; sourceTree = "<group>"; };
+		BE21709B1986377100D0A232 /* NCUObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCUObjectViewController.h; sourceTree = "<group>"; };
+		BE21709C1986377100D0A232 /* NCUObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCUObjectViewController.m; sourceTree = "<group>"; };
+		BE21709D1986377100D0A232 /* NSManagedObject+NCU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+NCU.h"; sourceTree = "<group>"; };
+		BE21709E1986377100D0A232 /* NSManagedObject+NCU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+NCU.m"; sourceTree = "<group>"; };
+		BE21709F1986377100D0A232 /* NSPropertyDescription+NCU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+NCU.h"; sourceTree = "<group>"; };
+		BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+NCU.m"; sourceTree = "<group>"; };
 		BE4ACF7619497B0900DF060B /* NMBSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBSerializer.h; sourceTree = "<group>"; };
 		BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Sync.h"; sourceTree = "<group>"; };
 		BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbusBase_iOS_Tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +97,6 @@
 		BEAC204918A385AF00BBC60E /* NimbusBase_iOS_Tutorial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NimbusBase_iOS_Tutorial-Prefix.pch"; sourceTree = "<group>"; };
 		BEAC204A18A385AF00BBC60E /* NITAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NITAppDelegate.h; sourceTree = "<group>"; };
 		BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NITAppDelegate.m; sourceTree = "<group>"; };
-		BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NimbusBase_iOS_Tutorial.xcdatamodel; sourceTree = "<group>"; };
 		BEAC205018A385AF00BBC60E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEAC205618A385AF00BBC60E /* NimbusBase_iOS_TutorialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NimbusBase_iOS_TutorialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAC205718A385AF00BBC60E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -150,6 +180,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE21704E198629FE00D0A232 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE21705319862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld */,
+				BEAC205018A385AF00BBC60E /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		BE21708D1986372700D0A232 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				BE21708A1986372200D0A232 /* NMTPlaygroundImagePickerController.h */,
+				BE21708B1986372200D0A232 /* NMTPlaygroundImagePickerController.m */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		BE21708E1986377100D0A232 /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				BE21708F1986377100D0A232 /* NCUAttributeViewCell.h */,
+				BE2170901986377100D0A232 /* NCUAttributeViewCell.m */,
+				BE2170911986377100D0A232 /* NCUController.h */,
+				BE2170921986377100D0A232 /* NCUController.m */,
+				BE2170931986377100D0A232 /* NCUEntityViewController.h */,
+				BE2170941986377100D0A232 /* NCUEntityViewController.m */,
+				BE2170951986377100D0A232 /* NCUModelViewController.h */,
+				BE2170961986377100D0A232 /* NCUModelViewController.m */,
+				BE2170971986377100D0A232 /* NCUObjectCreatorViewController.h */,
+				BE2170981986377100D0A232 /* NCUObjectCreatorViewController.m */,
+				BE2170991986377100D0A232 /* NCUObjectPickerViewController.h */,
+				BE21709A1986377100D0A232 /* NCUObjectPickerViewController.m */,
+				BE21709B1986377100D0A232 /* NCUObjectViewController.h */,
+				BE21709C1986377100D0A232 /* NCUObjectViewController.m */,
+				BE21709D1986377100D0A232 /* NSManagedObject+NCU.h */,
+				BE21709E1986377100D0A232 /* NSManagedObject+NCU.m */,
+				BE21709F1986377100D0A232 /* NSPropertyDescription+NCU.h */,
+				BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */,
+			);
+			path = Playground;
+			sourceTree = "<group>";
+		};
 		BEAC202D18A385AE00BBC60E = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +265,7 @@
 				BEAC204A18A385AF00BBC60E /* NITAppDelegate.h */,
 				BEAC204B18A385AF00BBC60E /* NITAppDelegate.m */,
 				BEAC207918A38B2100BBC60E /* Classes */,
-				BEAC205018A385AF00BBC60E /* Images.xcassets */,
-				BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */,
+				BE21704E198629FE00D0A232 /* Resources */,
 				BEAC204218A385AF00BBC60E /* Supporting Files */,
 			);
 			path = NimbusBase_iOS_Tutorial;
@@ -234,7 +306,8 @@
 				BEB4407818A4834700CF839A /* Base */,
 				BEB4407718A4833B00CF839A /* Server */,
 				BEB4407918A483FC00CF839A /* File */,
-				BEB4408C18A48C5000CF839A /* Quick */,
+				BE21708D1986372700D0A232 /* Database */,
+				BEB4408C18A48C5000CF839A /* Categories */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -242,6 +315,7 @@
 		BEAC207A18A38B5300BBC60E /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				BE21708E1986377100D0A232 /* Playground */,
 				BEAC20BC18A391C400BBC60E /* NimbusBase */,
 			);
 			path = Venders;
@@ -326,7 +400,7 @@
 			name = File;
 			sourceTree = "<group>";
 		};
-		BEB4408C18A48C5000CF839A /* Quick */ = {
+		BEB4408C18A48C5000CF839A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
 				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
@@ -337,7 +411,7 @@
 				BEB4408D18A48C7700CF839A /* UITableView+Quick.h */,
 				BEB4408E18A48C7700CF839A /* UITableView+Quick.m */,
 			);
-			name = Quick;
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,7 +459,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NIT;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = NimbusBase;
 				TargetAttributes = {
 					BEAC205518A385AF00BBC60E = {
@@ -438,19 +512,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEB4408F18A48C7700CF839A /* UITableView+Quick.m in Sources */,
+				BE2170A71986377100D0A232 /* NCUObjectViewController.m in Sources */,
 				BEB4407418A4832B00CF839A /* NMBServer+NIT.m in Sources */,
 				BEB4407618A4832B00CF839A /* NITServerViewController.m in Sources */,
+				BE2170A51986377100D0A232 /* NCUObjectCreatorViewController.m in Sources */,
 				BEB4408518A4878100CF839A /* UIImagePickerController+Picker.m in Sources */,
 				BEB4408118A4840800CF839A /* NITFileViewController.m in Sources */,
+				BE2170A11986377100D0A232 /* NCUAttributeViewCell.m in Sources */,
+				BE2170A31986377100D0A232 /* NCUEntityViewController.m in Sources */,
+				BE2170A61986377100D0A232 /* NCUObjectPickerViewController.m in Sources */,
 				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
 				BEB4408B18A48A9300CF839A /* UIView+AutoLayout.m in Sources */,
-				BEAC204F18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
+				BE2170A91986377100D0A232 /* NSPropertyDescription+NCU.m in Sources */,
 				BEB4407518A4832B00CF839A /* NITServerCell.m in Sources */,
+				BE21708C1986372200D0A232 /* NMTPlaygroundImagePickerController.m in Sources */,
 				BEAC204818A385AF00BBC60E /* main.m in Sources */,
 				BEB4408018A4840800CF839A /* NITFolderViewController.m in Sources */,
+				BE2170A41986377100D0A232 /* NCUModelViewController.m in Sources */,
 				BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */,
 				BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */,
+				BE2170A21986377100D0A232 /* NCUController.m in Sources */,
 				BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */,
+				BE21705519862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
+				BE2170A81986377100D0A232 /* NSManagedObject+NCU.m in Sources */,
 				BEB4408818A4888E00CF839A /* NITFileCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,7 +581,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -536,7 +620,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -684,12 +768,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BEAC204D18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodeld */ = {
+		BE21705319862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */,
+				BE21705419862B0F00D0A232 /* NimbusTester.xcdatamodel */,
 			);
-			currentVersion = BEAC204E18A385AF00BBC60E /* NimbusBase_iOS_Tutorial.xcdatamodel */;
+			currentVersion = BE21705419862B0F00D0A232 /* NimbusTester.xcdatamodel */;
 			path = NimbusBase_iOS_Tutorial.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

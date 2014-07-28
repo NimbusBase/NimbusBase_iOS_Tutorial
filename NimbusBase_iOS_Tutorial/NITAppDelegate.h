@@ -19,4 +19,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)mergeNMBMOContextWithNotification:(NSNotification *)notification;
+- (void)handleNMBUserContextSaveErrorNotification:(NSNotification *)notification;
+
 @end
