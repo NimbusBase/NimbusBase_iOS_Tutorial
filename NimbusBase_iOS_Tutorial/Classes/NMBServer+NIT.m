@@ -85,4 +85,9 @@
     return name;
 }
 
+- (NSString *)syncStateAction
+{
+    return self.isSynchronizing ? @"Synchronizing" : @"Synchronize";
+}
+
 @end

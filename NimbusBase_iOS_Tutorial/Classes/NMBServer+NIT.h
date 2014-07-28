@@ -13,6 +13,7 @@
 @property(nonatomic, readonly)NSString *authStateAction;
 
 - (NSString *)authStateAction;
+
 + (NSString *)authStateActionString:(NMBAuthState)state;
 
 + (NSString *)authStateString:(NMBAuthState)state;
@@ -21,4 +22,5 @@
 
 - (NSString *)iconName;
 
+- (NSString *)syncStateAction;
 @end

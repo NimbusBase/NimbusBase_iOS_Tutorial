@@ -77,53 +77,10 @@ static NSString *const kvo_isInitialized = @"isInitialized";
 }
 
 #pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NMBServer *server = self.server;
-    
-    switch (indexPath.section) {
-        case 0:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    cell.textLabel.text = @"Browser";
-                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
-
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 1:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-
-                    cell.textLabel.text = server.authStateAction;
-                    
-                    NMBAuthState authState = server.authState;
-                    cell.textLabel.alpha =
-                    (authState == NMBAuthStateIn || authState == NMBAuthStateOut)
-                    ? 1.0f : 0.5f;
-
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        default:
-            break;
-    }
-}
-
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSIndexPath *ret = nil;
     NMBServer *server = self.server;
+    BOOL canBeSelected = NO;
     
     switch (indexPath.section) {
         case 0:{
@@ -131,9 +88,7 @@ static NSString *const kvo_isInitialized = @"isInitialized";
             switch (indexPath.row) {
                 case 0:{
                     
-                    if (server.isInitialized) {
-                        ret = indexPath;
-                    }
+                    canBeSelected = server.isInitialized;
                     
                 }break;
                 default:
@@ -146,16 +101,21 @@ static NSString *const kvo_isInitialized = @"isInitialized";
             switch (indexPath.row) {
                 case 0:{
                     
-                    switch (server.authState) {
-                        case NMBAuthStateIn:{
-                            ret = indexPath;
-                        }break;
-                        case NMBAuthStateOut:{
-                            ret = indexPath;
-                        }break;
-                        default:
-                            break;
-                    }
+                    NMBAuthState state = server.authState;
+                    canBeSelected = (state == NMBAuthStateIn || state == NMBAuthStateOut);
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        case 2:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    canBeSelected = server.isInitialized;
                     
                 }break;
                 default:
@@ -167,11 +127,11 @@ static NSString *const kvo_isInitialized = @"isInitialized";
             break;
     }
     
-    
-    return ret;
+    return canBeSelected ? indexPath : nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
     NMBServer *server = self.server;
     
     switch (indexPath.section) {
@@ -180,12 +140,7 @@ static NSString *const kvo_isInitialized = @"isInitialized";
             switch (indexPath.row) {
                 case 0:{
                     
-                    if (server.isInitialized) {
-                        NITFolderViewController *con = [[NITFolderViewController alloc] init];
-                        con.server = server;
-                        con.file = server.root;
-                        [self.navigationController pushViewController:con animated:YES];
-                    }
+                    [self pushBrowser:server];
                     
                 }break;
                 default:
@@ -198,16 +153,20 @@ static NSString *const kvo_isInitialized = @"isInitialized";
             switch (indexPath.row) {
                 case 0:{
                     
-                    switch (server.authState) {
-                        case NMBAuthStateIn:{
-                            [server signOut];
-                        }break;
-                        case NMBAuthStateOut:{
-                            [server authorizeWithController:self];
-                        }break;
-                        default:
-                            break;
-                    }
+                    [self modifyAuthState:server];
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        case 2:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    [self modifySyncState:server];
                     
                 }break;
                 default:
@@ -227,13 +186,111 @@ static NSString *const kvo_isInitialized = @"isInitialized";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vCellReuse forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
+
+#pragma mark - Actions
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath{
+    NMBServer *server = self.server;
+    
+    switch (indexPath.section) {
+        case 0:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    cell.textLabel.text = @"Browser";
+                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        case 1:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    cell.textLabel.text = server.authStateAction;
+                    
+                    NMBAuthState authState = server.authState;
+                    cell.textLabel.alpha =
+                    (authState == NMBAuthStateIn || authState == NMBAuthStateOut)
+                    ? 1.0f : 0.5f;
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        case 2:{
+            
+            switch (indexPath.row) {
+                case 0:{
+                    
+                    cell.textLabel.text = server.syncStateAction;
+                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
+                    if (!server.isSynchronizing) {
+                        cell.detailTextLabel.text = @"";
+                    }
+                    
+                }break;
+                default:
+                    break;
+            }
+            
+        }break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)pushBrowser:(NMBServer *)server
+{
+    if (server.isInitialized) {
+        NITFolderViewController *con = [[NITFolderViewController alloc] init];
+        con.server = server;
+        con.file = server.root;
+        [self.navigationController pushViewController:con animated:YES];
+    }
+}
+
+- (void)modifyAuthState:(NMBServer *)server
+{
+    switch (server.authState) {
+        case NMBAuthStateIn:{
+            [server signOut];
+        }break;
+        case NMBAuthStateOut:{
+            [server authorizeWithController:self];
+        }break;
+        default:
+            break;
+    }
+}
+
+- (void)modifySyncState:(NMBServer *)server
+{
+    if (server.isSynchronizing)
+    {
+        [server.syncPromise cancel];
+    }
+    else
+    {
+        [server synchronize];
+    }
+}
+
 
 #pragma mark - Subviews
 - (UITableView *)tableView{
