@@ -17,13 +17,20 @@
 #import "NITFolderViewController.h"
 
 
-static NSString *const vCellReuse = @"R";
+static NSString
+*const vCellReuseBrowser = @"B",
+*const vCellReuseAuth = @"A",
+*const vCellReuseSync = @"S";
 
-static NSString *const kvo_authState = @"authState";
-static NSString *const kvo_isInitialized = @"isInitialized";
+static NSString
+*const kvo_syncPromise = @"syncPromise";
+
 
 @interface NITServerViewController () <UITableViewDataSource, UITableViewDelegate>
+
 @property(nonatomic, weak)UITableView *tableView;
+@property(nonatomic, weak)NMBPromise *syncingPromise;
+
 @end
 
 @implementation NITServerViewController
@@ -59,19 +66,40 @@ static NSString *const kvo_isInitialized = @"isInitialized";
 
 - (void)dealloc{
     self.server = nil;
+    self.syncingPromise = nil;
 }
 
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
     if (object == self.server) {
-        if ([keyPath isEqualToString:kvo_authState] || [keyPath isEqualToString:kvo_isInitialized]) {
+        if ([keyPath isEqualToString:NMBServerProperties.authState] ||
+            [keyPath isEqualToString:NMBServerProperties.isInitialized]) {
             
-            [self.tableView reloadRowsAtIndexPaths:
-             @[[NSIndexPath indexPathForRow:0 inSection:0],
-               [NSIndexPath indexPathForRow:0 inSection:1],]
-                                   withRowAnimation:UITableViewRowAnimationFade
-             ];
-        
+            NSArray *indexPaths = @[[NSIndexPath indexPathForRow:0 inSection:0],
+                                    [NSIndexPath indexPathForRow:0 inSection:1],
+                                    [NSIndexPath indexPathForRow:0 inSection:2],];
+            [self.tableView reloadRowsAtIndexPaths:indexPaths
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
+        else if ([keyPath isEqualToString:kvo_syncPromise]) {
+            
+            NMBPromise *promise = change[NSKeyValueChangeNewKey];
+            
+            self.syncingPromise =
+            (promise && ![promise isKindOfClass:[NSNull class]]) ?
+            promise :
+            nil;
+            
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2]
+                          withRowAnimation:UITableViewRowAnimationFade];
+        }
+    }
+    else if (object == self.syncingPromise) {
+        if ([keyPath isEqualToString:NMBPromiseProperties.progress]) {
+            
+            kvo_QuickComparison(NSNumber);
+            [self updateSyncProgress:new];
         }
     }
 }
@@ -154,6 +182,7 @@ static NSString *const kvo_isInitialized = @"isInitialized";
                 case 0:{
                     
                     [self modifyAuthState:server];
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
                     
                 }break;
                 default:
@@ -167,7 +196,8 @@ static NSString *const kvo_isInitialized = @"isInitialized";
                 case 0:{
                     
                     [self modifySyncState:server];
-                    
+                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
                 }break;
                 default:
                     break;
@@ -190,7 +220,35 @@ static NSString *const kvo_isInitialized = @"isInitialized";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vCellReuse forIndexPath:indexPath];
+
+    UITableViewCell
+    *cell = nil;
+    switch (indexPath.section) {
+        case 0:{
+            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseBrowser];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:vCellReuseBrowser];
+            }
+        }break;
+        case 1:{
+            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseAuth];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:vCellReuseAuth];
+            }
+        }break;
+        case 2:{
+            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseSync];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                              reuseIdentifier:vCellReuseSync];
+            }
+        }break;
+        default:
+            break;
+    }
+    
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -291,6 +349,14 @@ static NSString *const kvo_isInitialized = @"isInitialized";
     }
 }
 
+- (void)updateSyncProgress:(NSNumber *)progress
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%3.0f%%", 100 * progress.floatValue];
+    [cell setNeedsDisplay];
+    [cell setNeedsLayout];
+}
 
 #pragma mark - Subviews
 - (UITableView *)tableView{
@@ -302,7 +368,6 @@ static NSString *const kvo_isInitialized = @"isInitialized";
         
         tableView.delegate = self;
         tableView.dataSource = self;
-        [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:vCellReuse];
 
         tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [superview addSubview:tableView];
@@ -318,17 +383,36 @@ static NSString *const kvo_isInitialized = @"isInitialized";
 - (void)setServer:(NMBServer *)server{
     
     if (_server) {
-        [_server removeObserver:self forKeyPath:kvo_authState];
-        [_server removeObserver:self forKeyPath:kvo_isInitialized];
+        [_server removeObserver:self forKeyPath:NMBServerProperties.authState];
+        [_server removeObserver:self forKeyPath:NMBServerProperties.isInitialized];
+        [_server removeObserver:self forKeyPath:kvo_syncPromise];
     }
     
     _server = server;
     
     if (_server) {
-        [_server addObserver:self forKeyPath:kvo_authState options:kvoOptNOI context:nil];
-        [_server addObserver:self forKeyPath:kvo_isInitialized options:kvoOptNOI context:nil];
+        [_server addObserver:self forKeyPath:NMBServerProperties.authState options:kvoOptNOI context:nil];
+        [_server addObserver:self forKeyPath:NMBServerProperties.isInitialized options:kvoOptNOI context:nil];
+        [_server addObserver:self forKeyPath:kvo_syncPromise options:kvoOptNOI context:nil];
     }
     
+}
+
+- (void)setSyncingPromise:(NMBPromise *)syncingPromise
+{
+    if (_syncingPromise) {
+        [_syncingPromise removeObserver:self
+                             forKeyPath:NMBPromiseProperties.progress];
+    }
+    
+    _syncingPromise = syncingPromise;
+    
+    if (_syncingPromise) {
+        [_syncingPromise addObserver:self
+                          forKeyPath:NMBPromiseProperties.progress
+                             options:kvoOptNOI
+                             context:nil];
+    }
 }
 
 @end
