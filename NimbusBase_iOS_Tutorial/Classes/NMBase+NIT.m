@@ -21,8 +21,6 @@
         base = [[NMBase alloc] initWithPSCoordinator:appDelegate.persistentStoreCoordinator
                                              configs:self.configs];
         
-        [base trackChangesOfMOContext:appDelegate.managedObjectContext];
-        
         NSManagedObjectContext *nmbMOC = base.userMOContext;
         
         NSNotificationCenter *noti = [NSNotificationCenter defaultCenter];
