@@ -1,32 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="0.1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Player" syncable="YES">
-        <relationship name="check_user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="checkers" inverseEntity="User" syncable="YES"/>
-        <relationship name="tests" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Test" inverseName="player" inverseEntity="Test" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="players" inverseEntity="User" syncable="YES"/>
-    </entity>
-    <entity name="Test" syncable="YES">
-        <attribute name="create_time" attributeType="Date" syncable="YES"/>
-        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="point" attributeType="String" syncable="YES"/>
-        <attribute name="review" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="status" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="player" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="tests" inverseEntity="Player" syncable="YES"/>
-    </entity>
     <entity name="User" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="blog" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="hobbies" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="introduction" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="checkers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Player" inverseName="check_user" inverseEntity="Player" syncable="YES"/>
-        <relationship name="players" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Player" inverseName="user" inverseEntity="Player" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Player" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="Test" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="User" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="User" positionX="0" positionY="0" width="128" height="105"/>
     </elements>
 </model>
