@@ -125,24 +125,23 @@ NCUControllerDelegate
 
 - (UITableView *)tableView
 {
-    if (!_tableView)
-    {
-        UIView *superview = self.view;
-        
-        UITableView *tableView = [[UITableView alloc] initWithFrame:superview.bounds style:UITableViewStyleGrouped];
-        _tableView = tableView;
-        
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        
-        [tableView registerClass:[NITServerCell class] forCellReuseIdentifier:sCellReuseIDServer];
-        [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:sCellReuseIDPlayground];
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        [superview addSubview:tableView];
-        
-        [superview addNoMarginConstraintsToSubview:tableView];
-    }
+    if (_tableView) return _tableView;
+
+    UIView *superview = self.view;
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:superview.bounds style:UITableViewStyleGrouped];
+    _tableView = tableView;
+    
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    
+    [tableView registerClass:[NITServerCell class] forCellReuseIdentifier:sCellReuseIDServer];
+    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:sCellReuseIDPlayground];
+    
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [superview addSubview:tableView];
+    
+    [superview addNoMarginConstraintsToSubview:tableView];
     
     return _tableView;
 }
