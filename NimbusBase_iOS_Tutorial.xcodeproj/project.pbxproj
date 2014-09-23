@@ -36,7 +36,6 @@
 		BEAC209218A38B7500BBC60E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209118A38B7500BBC60E /* QuartzCore.framework */; };
 		BEAC209418A38B8000BBC60E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209318A38B8000BBC60E /* Security.framework */; };
 		BEAC209618A38B8A00BBC60E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */; };
-		BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC209818A38F1300BBC60E /* NMBase+NIT.m */; };
 		BEAC20CE18A391C400BBC60E /* libNimbusBase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC20CB18A391C400BBC60E /* libNimbusBase.a */; };
 		BEAC20CF18A391C400BBC60E /* NimbusBaseResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEAC20CD18A391C400BBC60E /* NimbusBaseResources.bundle */; };
 		BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4406B18A4827A00CF839A /* NITBaseViewController.m */; };
@@ -112,8 +111,6 @@
 		BEAC209118A38B7500BBC60E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BEAC209318A38B8000BBC60E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BEAC209518A38B8A00BBC60E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		BEAC209718A38F1300BBC60E /* NMBase+NIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBase+NIT.h"; sourceTree = "<group>"; };
-		BEAC209818A38F1300BBC60E /* NMBase+NIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NMBase+NIT.m"; sourceTree = "<group>"; };
 		BEAC20BE18A391C400BBC60E /* NimbusBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusBase.h; sourceTree = "<group>"; };
 		BEAC20BF18A391C400BBC60E /* NMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBase.h; sourceTree = "<group>"; };
 		BEAC20C018A391C400BBC60E /* NMBConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigs.h; sourceTree = "<group>"; };
@@ -385,8 +382,6 @@
 			children = (
 				BEB4406A18A4827A00CF839A /* NITBaseViewController.h */,
 				BEB4406B18A4827A00CF839A /* NITBaseViewController.m */,
-				BEAC209718A38F1300BBC60E /* NMBase+NIT.h */,
-				BEAC209818A38F1300BBC60E /* NMBase+NIT.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -536,7 +531,6 @@
 				BEB4408018A4840800CF839A /* NITFolderViewController.m in Sources */,
 				BE2170A41986377100D0A232 /* NCUModelViewController.m in Sources */,
 				BEB4408218A4840800CF839A /* NITImageViewController.m in Sources */,
-				BEAC209918A38F1300BBC60E /* NMBase+NIT.m in Sources */,
 				BE2170A21986377100D0A232 /* NCUController.m in Sources */,
 				BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */,
 				BE21705519862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,

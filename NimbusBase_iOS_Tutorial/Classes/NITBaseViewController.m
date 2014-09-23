@@ -11,7 +11,6 @@
 #import "NITAppDelegate.h"
 
 #import "NimbusBase.h"
-#import "NMBase+NIT.h"
 #import "NCUModelViewController.h"
 #import "NCUController.h"
 
@@ -61,8 +60,6 @@ NCUControllerDelegate
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.servers = self.servers;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -82,8 +79,8 @@ NCUControllerDelegate
 
 - (NSArray *)servers
 {
-    if (_servers) return _servers;
-    return _servers = [[NMBase sharedBase] servers];
+    NMBase *base = [[(NITAppDelegate *)[[UIApplication sharedApplication] delegate] persistentStoreCoordinator] nimbusBase];
+    return base.servers;
 }
 
 - (NSArray *)tableItems
