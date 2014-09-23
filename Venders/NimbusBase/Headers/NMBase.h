@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "NMBSerializer.h"
+#import "NMBModelMapper.h"
 
-@class NSManagedObjectContext, NSManagedObject;
+@class NSManagedObjectContext, NSPersistentStore, NSManagedObject;
 @class NMBPromise;
 
 /**
@@ -20,7 +21,7 @@
 /**
  * @brief The servers decribed in configs will be instantiated and can be access via this property.
  */
-@property(nonatomic, readonly)NSArray *servers;
+@property (nonatomic, readonly) NSArray *servers;
 
 /**
  * @brief The only init method shoud be used on NMBase.
@@ -56,6 +57,7 @@
  * @discussion You are supposed not to use this context to CRUD your data, because it's created and runs on a private thread of NMBase. But you should add observer on NSNotificationCenter with event name NSManagedObjectContextDidSaveNotification. So that you can merge any changes NMBase fetching from cloud.
  */
 @property (nonatomic, readonly) NSManagedObjectContext *userMOContext;
+@property (nonatomic, readonly, weak) NSPersistentStoreCoordinator *userPSCoordinator;
 
 /**
  * @brief The instance that is responsible for serializing some objects that can't be translated to JSON directly.
@@ -64,6 +66,7 @@
  */
 @property (nonatomic, weak) id<NMBSerializer> serializer;
 
+@property (nonatomic, weak) id<NMBModelMapper> modelMapper;
 
 /**
  * @brief Track the changes of the user's NSManagedObjectContext.

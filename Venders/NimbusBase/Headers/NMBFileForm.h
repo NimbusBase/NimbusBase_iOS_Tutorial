@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 NimbusBase. All rights reserved.
 //
 
-#import "NMBObject.h"
+#import <Foundation/Foundation.h>
 
 @class NMBFile;
 
 /**
  * NMBFileForm is responsible for collecting information of a file when you want to create or update it.
  */
-@interface NMBFileForm : NMBObject
+@interface NMBFileForm : NSObject
 
 /**
  * @brief The name of the file.
@@ -47,14 +47,16 @@
  *
  * @return An instance of NMBFileForm has same properties with source file.
  */
-- (id)initWithFile:(NMBFile *)file;
+- (instancetype)initWithFile:(NMBFile *)file;
 
 /**
  * @brief The convenient method to new a NMBFileForm represents a folder.
  * 
  * @param name The name of the folder.
  */
-+ (id)folderWithName:(NSString *)name;
++ (instancetype)folderWithName:(NSString *)name;
+
++ (instancetype)rename:(NSString *)name file:(NMBFile *)file;
 
 /**
  * @brief If the file content you want to upload is on the disk, you can use this method to avoid unnecessary memory cost.
@@ -64,6 +66,7 @@
  * @return Whether the file content is successfully to be set.
  */
 - (BOOL)setContentViaURL:(NSURL *)fromURL;
+
 
 #pragma mark - Disk
 

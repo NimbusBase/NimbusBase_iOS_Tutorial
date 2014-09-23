@@ -7,7 +7,7 @@
 //
 
 #import "NITAppDelegate.h"
-#import "NMBase+NIT.h"
+#import "NimbusBase.h"
 #import "NITBaseViewController.h"
 
 @implementation NITAppDelegate
@@ -65,19 +65,6 @@
 
 #pragma mark - Database
 
-- (void)saveContext{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
-
 - (void)mergeNMBMOContextWithNotification:(NSNotification *)notification
 {
     if (![NSThread isMainThread]) {
@@ -109,6 +96,7 @@
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+        [coordinator.nimbusBase trackChangesOfMOContext:_managedObjectContext];
     }
     return _managedObjectContext;
 }
@@ -164,6 +152,19 @@
     }    
     
     return _persistentStoreCoordinator;
+}
+
+- (void)saveContext{
+    NSError *error = nil;
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
 }
 
 #pragma mark - Application's Documents directory

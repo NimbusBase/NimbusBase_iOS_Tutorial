@@ -8,19 +8,33 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const NValMIMEFolder;
-extern NSString *const NValMIMEBinary;
+extern NSString
+*const NValMIMEFolder,
+*const NValMIMEBinary;
 
-extern NSString *const NKeyPrmsFile;
-extern NSString *const NKeyPrmsForm;
-extern NSString *const NKeyPrmsParent;
+extern NSString
+*const NKeyPrmsFile,
+*const NKeyPrmsForm,
+*const NKeyPrmsParent;
 
-extern NSString *const NValMethodCreate;
-extern NSString *const NValMethodRetrieve;
-extern NSString *const NValMethodUpdate;
-extern NSString *const NValMethodDelete;
-extern NSString *const NValMethodSync;
+extern NSString
+*const NValMethodCreate,
+*const NValMethodRetrieve,
+*const NValMethodUpdate,
+*const NValMethodDelete,
+*const NValMethodRename,
+*const NValMethodUserMe,
+*const NValMethodSync;
 
-extern NSString *const NValMethodUserMe;
+extern NSString
+*const NKeyAccountID,
+*const NKeyPassword;
 
-extern NSString *const NKeyAccountID, *const NKeyPassword;
+extern NSString
+*const NKeySyncCommitType;
+
+typedef NS_ENUM(NSUInteger, NMBSyncCommitType) {
+    NMBSyncCommitTypeNormal,
+    NMBSyncCommitTypePushEntirely,
+    NMBSyncCommitTypePullEntirely
+};

@@ -8,25 +8,32 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NMBConfigs : NSObject
-@end
+extern NSString
+*const NCfgK_Servers;
 
-extern NSString *const NCfgK_Servers;
-extern NSString *const NCfgK_Cloud;
-extern NSString *const NCfgV_GDrive;
-extern NSString *const NCfgV_Dropbox;
-extern NSString *const NCfgV_Box;
+extern NSString
+*const NCfgV_GDrive,
+*const NCfgV_Dropbox,
+*const NCfgV_Box,
+*const NCfgK_Cloud;
 
-extern NSString *const NCfgK_AppName;
+extern NSString
+*const NCfgK_AppName;
 
-//GDriveClientID, DropboxAppKey
-extern NSString *const NCfgK_AppID;
-//GDriveClientSecret, DropboxAppSecret
-extern NSString *const NCfgK_AppSecret;
+extern NSString
+*const NCfgK_AppID, //GDriveClientID, DropboxAppKey
+*const NCfgK_AppSecret; //GDriveClientSecret, DropboxAppSecret
 
-//kGTLAuthScope*, DropBoxAccessType
-extern NSString *const NCfgK_AuthScope;
-extern NSString *const NCfgV_Root;
-extern NSString *const NCfgV_AppData;
+extern NSString
+*const NCfgV_Root,
+*const NCfgV_AppData,
+*const NCfgK_AuthScope; //kGTLAuthScope*, DropBoxAccessType
 
+extern NSString
+*const NCfgK_FindPropertiesInOldVersionModels;
 
+extern NSString
+*const NCfgK_ModelMapper;
+
+extern NSString
+*const NCfgK_ParallelPromiseCount;

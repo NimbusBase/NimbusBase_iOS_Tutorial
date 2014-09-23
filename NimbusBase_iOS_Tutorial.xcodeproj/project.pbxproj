@@ -86,6 +86,11 @@
 		BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+NCU.m"; sourceTree = "<group>"; };
 		BE4ACF7619497B0900DF060B /* NMBSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBSerializer.h; sourceTree = "<group>"; };
 		BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Sync.h"; sourceTree = "<group>"; };
+		BE85B2BB19D19EF800CC49C7 /* NMBFolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFolderController.h; sourceTree = "<group>"; };
+		BE85B2BC19D19EF800CC49C7 /* NMBModelMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBModelMapper.h; sourceTree = "<group>"; };
+		BE85B2BD19D19EF800CC49C7 /* NMBResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBResponse.h; sourceTree = "<group>"; };
+		BE85B2BE19D19EF800CC49C7 /* NSPersistentStoreCoordinator+NMB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStoreCoordinator+NMB.h"; sourceTree = "<group>"; };
+		BE85B2BF19D1A0BC00CC49C7 /* NMBCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBCallback.h; sourceTree = "<group>"; };
 		BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbusBase_iOS_Tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAC203918A385AF00BBC60E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,12 +117,10 @@
 		BEAC20BE18A391C400BBC60E /* NimbusBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NimbusBase.h; sourceTree = "<group>"; };
 		BEAC20BF18A391C400BBC60E /* NMBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBase.h; sourceTree = "<group>"; };
 		BEAC20C018A391C400BBC60E /* NMBConfigs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigs.h; sourceTree = "<group>"; };
-		BEAC20C118A391C400BBC60E /* NMBConfigurableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConfigurableObject.h; sourceTree = "<group>"; };
 		BEAC20C218A391C400BBC60E /* NMBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBConstants.h; sourceTree = "<group>"; };
 		BEAC20C318A391C400BBC60E /* NMBFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFile.h; sourceTree = "<group>"; };
 		BEAC20C418A391C400BBC60E /* NMBFileForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFileForm.h; sourceTree = "<group>"; };
 		BEAC20C518A391C400BBC60E /* NMBNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBNotificationCenter.h; sourceTree = "<group>"; };
-		BEAC20C618A391C400BBC60E /* NMBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBObject.h; sourceTree = "<group>"; };
 		BEAC20C718A391C400BBC60E /* NMBPromise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBPromise.h; sourceTree = "<group>"; };
 		BEAC20C818A391C400BBC60E /* NMBServer+Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Auth.h"; sourceTree = "<group>"; };
 		BEAC20C918A391C400BBC60E /* NMBServer+Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Client.h"; sourceTree = "<group>"; };
@@ -334,17 +337,20 @@
 		BEAC20BD18A391C400BBC60E /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				BE85B2BF19D1A0BC00CC49C7 /* NMBCallback.h */,
+				BE85B2BB19D19EF800CC49C7 /* NMBFolderController.h */,
+				BE85B2BC19D19EF800CC49C7 /* NMBModelMapper.h */,
+				BE85B2BD19D19EF800CC49C7 /* NMBResponse.h */,
+				BE85B2BE19D19EF800CC49C7 /* NSPersistentStoreCoordinator+NMB.h */,
 				BE4ACF7619497B0900DF060B /* NMBSerializer.h */,
 				BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */,
 				BEAC20BE18A391C400BBC60E /* NimbusBase.h */,
 				BEAC20BF18A391C400BBC60E /* NMBase.h */,
 				BEAC20C018A391C400BBC60E /* NMBConfigs.h */,
-				BEAC20C118A391C400BBC60E /* NMBConfigurableObject.h */,
 				BEAC20C218A391C400BBC60E /* NMBConstants.h */,
 				BEAC20C318A391C400BBC60E /* NMBFile.h */,
 				BEAC20C418A391C400BBC60E /* NMBFileForm.h */,
 				BEAC20C518A391C400BBC60E /* NMBNotificationCenter.h */,
-				BEAC20C618A391C400BBC60E /* NMBObject.h */,
 				BEAC20C718A391C400BBC60E /* NMBPromise.h */,
 				BEAC20C818A391C400BBC60E /* NMBServer+Auth.h */,
 				BEAC20C918A391C400BBC60E /* NMBServer+Client.h */,

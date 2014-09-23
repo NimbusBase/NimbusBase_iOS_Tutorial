@@ -62,6 +62,9 @@
  */
 - (NMBPromise *)deleteFile:(NMBFile *)file;
 
+- (NMBPromise *)renameFile:(NMBFile *)file withForm:(NMBFileForm *)form;
+
+
 #pragma mark - Promises
 
 /**

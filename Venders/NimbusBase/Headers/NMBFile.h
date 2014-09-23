@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 NimbusBase. All rights reserved.
 //
 
-#import "NMBObject.h"
+#import <Foundation/Foundation.h>
 
 
 @class NMBFileForm;
@@ -14,7 +14,7 @@
 /**
  * NMBFile represents a file on cloud. You should never create an instance of it by yourself, they are always returned by instance of NMBServer. NimbusBase regards folder as file too. The difference is in the callback of retrieving a file, you get instance of NSData as response, but in callback of retrieving folder you get instance of NSArray, which contains its children.
  */
-@interface NMBFile : NMBObject
+@interface NMBFile : NSObject
 
 #pragma mark - Meta
 
