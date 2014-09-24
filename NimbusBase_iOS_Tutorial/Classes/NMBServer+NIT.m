@@ -10,11 +10,13 @@
 
 @implementation NMBServer (NIT)
 
-- (NSString *)authStateAction{
+- (NSString *)authStateAction
+{
     return [self.class authStateActionString:self.authState];
 }
 
-+ (NSString *)authStateActionString:(NMBAuthState)state{
++ (NSString *)authStateActionString:(NMBAuthState)state
+{
     NSString *string = @"None";
     switch (state) {
         case NMBAuthStateSignIn:{
@@ -34,10 +36,10 @@
     }
     
     return string;
-
 }
 
-+ (NSString *)authStateString:(NMBAuthState)state{
++ (NSString *)authStateString:(NMBAuthState)state
+{
     NSString *string = @"None";
     switch (state) {
         case NMBAuthStateSignIn:{
@@ -59,30 +61,34 @@
     return string;
 }
 
-- (NSString *)cloudType{
-    NSString *className = NSStringFromClass(self.class);
-    NSString *type = nil;
-    if ([className isEqualToString:@"NMBGDrive"]) {
-        type = @"Google Drive";
-    } else if ([className isEqualToString:@"NMBDropbox"]) {
-        type = @"Dropbox";
-    } else if ([className isEqualToString:@"NMBBox"]) {
-        type = @"Box";
+- (NSString *)cloudType
+{
+    static NSDictionary *map = nil;
+    
+    if (!map) {
+        map = @{
+                 NCfgV_GDrive: @"Google Drive",
+                 NCfgV_Dropbox: @"Dropbox",
+                 NCfgV_Box: @"Box",
+                 };
     }
-    return type;
+    
+    return map[self.cloud];
 }
 
-- (NSString *)iconName{
-    NSString *className = NSStringFromClass(self.class);
-    NSString *name = nil;
-    if ([className isEqualToString:@"NMBGDrive"]) {
-        name = @"iconGDrive";
-    } else if ([className isEqualToString:@"NMBDropbox"]) {
-        name = @"iconDropbox";
-    } else if ([className isEqualToString:@"NMBBox"]) {
-        name = @"iconBox";
+- (NSString *)iconName
+{
+    static NSDictionary *map = nil;
+    
+    if (!map) {
+        map = @{
+                 NCfgV_GDrive: @"iconGDrive",
+                 NCfgV_Dropbox: @"iconDropbox",
+                 NCfgV_Box: @"iconBox",
+                 };
     }
-    return name;
+    
+    return map[self.cloud];
 }
 
 - (NSString *)syncStateAction
