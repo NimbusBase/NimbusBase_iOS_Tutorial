@@ -18,5 +18,6 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (BOOL)migratePersistentStoreiCloudOn:(BOOL)iCloudOn;
 
 @end

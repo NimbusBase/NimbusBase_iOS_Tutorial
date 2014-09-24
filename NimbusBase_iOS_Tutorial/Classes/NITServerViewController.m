@@ -13,6 +13,7 @@
 #import "NMBServer+NIT.h"
 #import "UITableView+Quick.h"
 #import "UIView+AutoLayout.h"
+#import "NSArray+Quick.h"
 
 #import "NITFolderViewController.h"
 
@@ -132,23 +133,7 @@ static NSString
     static NSDictionary *map = nil;
     if (map != nil) return map;
     
-    NSArray *actions = self.class.items;
-    NSMutableDictionary *collector = [[NSMutableDictionary alloc] init];
-    
-    for (NSUInteger firstIndex = 0; firstIndex < actions.count; firstIndex++)
-    {
-        NSArray *secondActions = actions[firstIndex];
-        for (NSUInteger secondIndex = 0; secondIndex < secondActions.count; secondIndex++)
-        {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:secondIndex
-                                                        inSection:firstIndex];
-            NSString *action = secondActions[secondIndex];
-            
-            collector[action] = indexPath;
-        }
-    }
-    
-    return map = [[NSDictionary alloc] initWithDictionary:collector];
+    return map = [[NSDictionary alloc] initWithDictionary:[self.class.items indexPathsByStringKey]];
 }
 
 #pragma mark - Subviews

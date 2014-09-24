@@ -17,6 +17,8 @@
 #import "KVOUtilities.h"
 #import "UIView+AutoLayout.h"
 #import "UITableView+Quick.h"
+#import "NSArray+Quick.h"
+#import "NSUserDefaults+NIT.h"
 
 #import "NITServerViewController.h"
 #import "NITServerCell.h"
@@ -69,6 +71,27 @@ NCUControllerDelegate
     [self.tableView deselectSelectedRowsAnimated:animated];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSNotificationCenter *ntfctnCntr = [NSNotificationCenter defaultCenter];
+    [ntfctnCntr addObserver:self
+                   selector:@selector(handleUbiquityIdentityDidChangeNotification:)
+                       name:NSUbiquityIdentityDidChangeNotification
+                     object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    NSNotificationCenter *ntfctnCntr = [NSNotificationCenter defaultCenter];
+    [ntfctnCntr removeObserver:self
+                          name:NSUbiquityIdentityDidChangeNotification
+                        object:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -87,8 +110,17 @@ NCUControllerDelegate
 {
     return @[
              self.servers,
+             @[@"iCloud"],
              @[@"Playground"],
              ];
+}
+
+- (NSDictionary *)indexPathsByItems
+{
+    static NSDictionary *map = nil;
+    if (map != nil) return map;
+    
+    return map = [[NSDictionary alloc] initWithDictionary:[self.tableItems indexPathsByStringKey]];
 }
 
 #pragma mark - Subviews
@@ -105,6 +137,21 @@ NCUControllerDelegate
     {
         cell.textLabel.text = @"Playground";
     }
+    else if ([@"iCloud" isEqual:item])
+    {
+        NITServerCell *serverCell = (NITServerCell *)cell;
+        
+        BOOL isiCloudOn = NO;
+        
+        UILabel *textLabel = serverCell.textLabel;
+        UIImageView *imageView = serverCell.imageView;
+
+        textLabel.text = @"iCloud";
+        imageView.image = [UIImage imageNamed:@"iconiCloud"];
+        
+        imageView.alpha = textLabel.alpha = isiCloudOn ? 1.0f : 0.5f;
+    }
+    
     /* Remove
     switch (indexPath.section) {
         case 0:{
@@ -171,6 +218,26 @@ NCUControllerDelegate
                                          animated:YES];
 }
 
+- (void)switchiCloud
+{
+    NITAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL targetiCloudState = !userDefaults.isiCloudOn;
+    if ([appDelegate migratePersistentStoreiCloudOn:targetiCloudState])
+        userDefaults.isiCloudOn = targetiCloudState;
+}
+
+#pragma mark - Events
+
+- (void)handleUbiquityIdentityDidChangeNotification:(NSNotification *)notification
+{
+    UITableView *tableView = self.tableView;
+    if (!tableView) return;
+    
+    [tableView reloadRowsAtIndexPaths:[self indexPathsByItems][@"iCloud"]
+                     withRowAnimation:UITableViewRowAnimationFade];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -210,7 +277,7 @@ NCUControllerDelegate
     id item = self.tableItems[indexPath.section][indexPath.row];
     
     NSString *reuserID = nil;
-    if ([item isKindOfClass:[NMBServer class]])
+    if ([item isKindOfClass:[NMBServer class]] || [@"iCloud" isEqualToString:item])
         reuserID = sCellReuseIDServer;
     else if ([@"Playground" isEqual:item])
         reuserID = sCellReuseIDPlayground;
@@ -232,6 +299,13 @@ NCUControllerDelegate
         [self pushViewControllerForServer:item];
     else if ([@"Playground" isEqual:item])
         [self pushPlaygroundViewController];
+    else if ([@"iCloud" isEqual:item])
+    {
+        [self switchiCloud];
+        [tableView reloadRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+    }
+    
     /*
     switch (indexPath.section) {
         case 0:{

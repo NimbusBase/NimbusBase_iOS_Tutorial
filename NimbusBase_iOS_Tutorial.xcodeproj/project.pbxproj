@@ -18,6 +18,8 @@
 		BE2170A71986377100D0A232 /* NCUObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21709C1986377100D0A232 /* NCUObjectViewController.m */; };
 		BE2170A81986377100D0A232 /* NSManagedObject+NCU.m in Sources */ = {isa = PBXBuildFile; fileRef = BE21709E1986377100D0A232 /* NSManagedObject+NCU.m */; };
 		BE2170A91986377100D0A232 /* NSPropertyDescription+NCU.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */; };
+		BE3F87A819D29C27003F8B3B /* NSArray+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */; };
+		BE3F87AB19D29FB6003F8B3B /* NSUserDefaults+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */; };
 		BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
 		BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */; };
 		BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203D18A385AF00BBC60E /* UIKit.framework */; };
@@ -83,6 +85,10 @@
 		BE21709E1986377100D0A232 /* NSManagedObject+NCU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+NCU.m"; sourceTree = "<group>"; };
 		BE21709F1986377100D0A232 /* NSPropertyDescription+NCU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPropertyDescription+NCU.h"; sourceTree = "<group>"; };
 		BE2170A01986377100D0A232 /* NSPropertyDescription+NCU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPropertyDescription+NCU.m"; sourceTree = "<group>"; };
+		BE3F87A619D29C27003F8B3B /* NSArray+Quick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Quick.h"; sourceTree = "<group>"; };
+		BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Quick.m"; sourceTree = "<group>"; };
+		BE3F87A919D29FB6003F8B3B /* NSUserDefaults+NIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+NIT.h"; sourceTree = "<group>"; };
+		BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+NIT.m"; sourceTree = "<group>"; };
 		BE4ACF7619497B0900DF060B /* NMBSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBSerializer.h; sourceTree = "<group>"; };
 		BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Sync.h"; sourceTree = "<group>"; };
 		BE85B2BB19D19EF800CC49C7 /* NMBFolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFolderController.h; sourceTree = "<group>"; };
@@ -404,6 +410,8 @@
 		BEB4408C18A48C5000CF839A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BE3F87A919D29FB6003F8B3B /* NSUserDefaults+NIT.h */,
+				BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */,
 				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
 				BEB4408318A4878100CF839A /* UIImagePickerController+Picker.h */,
 				BEB4408418A4878100CF839A /* UIImagePickerController+Picker.m */,
@@ -411,6 +419,8 @@
 				BEB4408A18A48A9300CF839A /* UIView+AutoLayout.m */,
 				BEB4408D18A48C7700CF839A /* UITableView+Quick.h */,
 				BEB4408E18A48C7700CF839A /* UITableView+Quick.m */,
+				BE3F87A619D29C27003F8B3B /* NSArray+Quick.h */,
+				BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -535,6 +545,8 @@
 				BEB4406C18A4827A00CF839A /* NITBaseViewController.m in Sources */,
 				BE21705519862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld in Sources */,
 				BE2170A81986377100D0A232 /* NSManagedObject+NCU.m in Sources */,
+				BE3F87AB19D29FB6003F8B3B /* NSUserDefaults+NIT.m in Sources */,
+				BE3F87A819D29C27003F8B3B /* NSArray+Quick.m in Sources */,
 				BEB4408818A4888E00CF839A /* NITFileCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

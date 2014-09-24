@@ -9,6 +9,7 @@
 #import "NITAppDelegate.h"
 #import "NimbusBase.h"
 #import "NITBaseViewController.h"
+#import "NSUserDefaults+NIT.h"
 
 @implementation NITAppDelegate
 
@@ -106,6 +107,23 @@
              };
 }
 
+- (NSDictionary *)persistentStoreOptions
+{
+    NSDictionary *options = @{
+                              NSMigratePersistentStoresAutomaticallyOption: @YES,
+                              NSInferMappingModelAutomaticallyOption: @YES,
+                              };
+    return options;
+}
+
+- (NSURL *)persistentStoreURLiCloudOn:(BOOL)isiCloudOn
+{
+    return [[self applicationDocumentsDirectory] URLByAppendingPathComponent:
+            isiCloudOn ?
+            @"NimbusBase_iOS_Tutorial_iCloud.sqlite" :
+            @"NimbusBase_iOS_Tutorial.sqlite"];
+}
+
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
@@ -149,15 +167,79 @@
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:_persistentStoreCoordinator];
 
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"NimbusBase_iOS_Tutorial.sqlite"];
+
+    
+    NSURL *ubiquityURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+    BOOL iCloudOn = [[NSUserDefaults standardUserDefaults] isiCloudOn] && (ubiquityURL != nil);
+    
+    NSMutableDictionary *options = [[self persistentStoreOptions] mutableCopy];
+    if (iCloudOn)
+    {
+        NSURL *iCloudDataURL = [ubiquityURL URLByAppendingPathComponent:@"iCloudData"];
+        [options addEntriesFromDictionary:
+         @{
+           NSPersistentStoreUbiquitousContentNameKey: @"iCloudStore",
+           NSPersistentStoreUbiquitousContentURLKey: iCloudDataURL
+           }];
+    }
+    
+    NSURL *storeURL = [self persistentStoreURLiCloudOn:iCloudOn];
+    
     NSError *error = nil;
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                   configuration:nil URL:storeURL
+                                                         options:nil
+                                                           error:&error]) {
 
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     
     return _persistentStoreCoordinator;
+}
+
+- (BOOL)migratePersistentStoreiCloudOn:(BOOL)iCloudOn
+{
+    NSPersistentStore *currentStore = _persistentStoreCoordinator.persistentStores.firstObject;
+    BOOL isiCloudOnCurrently = currentStore.options[NSPersistentStoreUbiquitousContentURLKey] != nil;
+    if (iCloudOn == isiCloudOnCurrently) return YES;
+    
+    NSMutableDictionary *options = [[self persistentStoreOptions] mutableCopy];
+    if (iCloudOn)
+    {
+        NSURL *ubiquityURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+        if (ubiquityURL)
+        {
+            NSURL *iCloudDataURL = [ubiquityURL URLByAppendingPathComponent:@"iCloudData"];
+            [options addEntriesFromDictionary:
+             @{
+               NSPersistentStoreUbiquitousContentNameKey: @"iCloudStore",
+               NSPersistentStoreUbiquitousContentURLKey: iCloudDataURL
+               }];
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    else
+    {
+        [options addEntriesFromDictionary:
+         @{
+           NSPersistentStoreRemoveUbiquitousMetadataOption : @YES
+           }];
+    }
+    
+    NSURL *storeURL = [self persistentStoreURLiCloudOn:iCloudOn];
+    NSError *error = nil;
+    [_persistentStoreCoordinator migratePersistentStore:currentStore
+                                                  toURL:storeURL
+                                                options:options
+                                               withType:NSSQLiteStoreType
+                                                  error:&error];
+    NSLog(@"%@", error);
+    
+    return error == nil;
 }
 
 - (void)saveContext{
