@@ -100,18 +100,29 @@ static NSString
 
 - (void)setSyncingPromise:(NMBPromise *)syncingPromise
 {
-    if (_syncingPromise) {
+    if (_syncingPromise)
+    {
         [_syncingPromise removeObserver:self
                              forKeyPath:NMBPromiseProperties.progress];
     }
     
     _syncingPromise = syncingPromise;
     
-    if (_syncingPromise) {
+    if (_syncingPromise)
+    {
         [_syncingPromise addObserver:self
                           forKeyPath:NMBPromiseProperties.progress
                              options:kvoOptNOI
                              context:nil];
+        
+        [_syncingPromise onQueue:dispatch_get_main_queue() fail:
+         ^(NMBPromise *promise, NSError *error)
+         {
+             if (promise.response.isCancelled)
+                 return;
+             
+             NSLog(@"%@", error);
+         }];
     }
 }
 

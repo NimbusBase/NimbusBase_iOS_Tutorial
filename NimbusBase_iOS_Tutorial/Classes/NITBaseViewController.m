@@ -141,7 +141,9 @@ NCUControllerDelegate
     {
         NITServerCell *serverCell = (NITServerCell *)cell;
         
-        BOOL isiCloudOn = NO;
+        NITAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSPersistentStore *store = appDelegate.persistentStoreCoordinator.persistentStores.firstObject;
+        BOOL isiCloudOn = store.options[NSPersistentStoreUbiquitousContentURLKey] != nil;
         
         UILabel *textLabel = serverCell.textLabel;
         UIImageView *imageView = serverCell.imageView;

@@ -187,11 +187,12 @@
     
     NSError *error = nil;
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                   configuration:nil URL:storeURL
-                                                         options:nil
+                                                   configuration:nil
+                                                             URL:storeURL
+                                                         options:options
                                                            error:&error]) {
 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, \n%@", error, [error userInfo]);
         abort();
     }    
     
@@ -232,12 +233,14 @@
     
     NSURL *storeURL = [self persistentStoreURLiCloudOn:iCloudOn];
     NSError *error = nil;
-    [_persistentStoreCoordinator migratePersistentStore:currentStore
-                                                  toURL:storeURL
-                                                options:options
-                                               withType:NSSQLiteStoreType
-                                                  error:&error];
-    NSLog(@"%@", error);
+    if (![_persistentStoreCoordinator migratePersistentStore:currentStore
+                                                       toURL:storeURL
+                                                     options:options
+                                                    withType:NSSQLiteStoreType
+                                                       error:&error]) {
+        NSLog(@"Unresolved error %@, \n%@", error, [error userInfo]);
+        abort();
+    }
     
     return error == nil;
 }

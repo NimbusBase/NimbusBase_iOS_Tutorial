@@ -89,6 +89,7 @@
 		BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Quick.m"; sourceTree = "<group>"; };
 		BE3F87A919D29FB6003F8B3B /* NSUserDefaults+NIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+NIT.h"; sourceTree = "<group>"; };
 		BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+NIT.m"; sourceTree = "<group>"; };
+		BE3F87AC19D2AAD9003F8B3B /* NimbusBase_iOS_Tutorial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NimbusBase_iOS_Tutorial.entitlements; sourceTree = "<group>"; };
 		BE4ACF7619497B0900DF060B /* NMBSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBSerializer.h; sourceTree = "<group>"; };
 		BE4ACF7719497B0900DF060B /* NMBServer+Sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NMBServer+Sync.h"; sourceTree = "<group>"; };
 		BE85B2BB19D19EF800CC49C7 /* NMBFolderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBFolderController.h; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		BE21704E198629FE00D0A232 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BE3F87AC19D2AAD9003F8B3B /* NimbusBase_iOS_Tutorial.entitlements */,
 				BE21705319862B0F00D0A232 /* NimbusBase_iOS_Tutorial.xcdatamodeld */,
 				BEAC205018A385AF00BBC60E /* Images.xcassets */,
 			);
@@ -410,9 +412,9 @@
 		BEB4408C18A48C5000CF839A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
 				BE3F87A919D29FB6003F8B3B /* NSUserDefaults+NIT.h */,
 				BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */,
-				BEB4406D18A482DE00CF839A /* KVOUtilities.h */,
 				BEB4408318A4878100CF839A /* UIImagePickerController+Picker.h */,
 				BEB4408418A4878100CF839A /* UIImagePickerController+Picker.m */,
 				BEB4408918A48A9300CF839A /* UIView+AutoLayout.h */,
@@ -473,6 +475,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = NimbusBase;
 				TargetAttributes = {
+					BEAC203518A385AE00BBC60E = {
+						DevelopmentTeam = 5FMKE33E9S;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
 					BEAC205518A385AF00BBC60E = {
 						TestTargetID = BEAC203518A385AE00BBC60E;
 					};
@@ -666,6 +676,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
@@ -688,6 +699,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Prefix.pch";
 				INFOPLIST_FILE = "NimbusBase_iOS_Tutorial/NimbusBase_iOS_Tutorial-Info.plist";
