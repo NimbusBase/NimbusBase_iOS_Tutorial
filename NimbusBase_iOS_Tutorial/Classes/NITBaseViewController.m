@@ -19,6 +19,7 @@
 #import "UITableView+Quick.h"
 #import "NSArray+Quick.h"
 #import "NSUserDefaults+NIT.h"
+#import "UIAlertView+Quick.h"
 
 #import "NITServerViewController.h"
 #import "NITServerCell.h"
@@ -37,6 +38,8 @@ NCUControllerDelegate
 
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSArray *servers;
+
+@property (nonatomic, weak) UIAlertView *alertUnacquaintedStore;
 
 @end
 
@@ -100,22 +103,21 @@ NCUControllerDelegate
 
 #pragma mark - Models
 
-- (NSArray *)servers
+- (NMBase *)base
 {
-    NMBase *base = [[(NITAppDelegate *)[[UIApplication sharedApplication] delegate] persistentStoreCoordinator] nimbusBase];
-    return base.servers;
+    return [[(NITAppDelegate *)[[UIApplication sharedApplication] delegate] persistentStoreCoordinator] nimbusBase];
 }
 
 - (NSArray *)tableItems
 {
     return @[
-             self.servers,
+             self.base.servers,
              @[@"iCloud"],
-             @[@"Playground"],
+             @[@"Playground", @"Synchronize"],
              ];
 }
 
-- (NSDictionary *)indexPathsByItems
+- (NSDictionary *)indexPathsByItem
 {
     static NSDictionary *map = nil;
     if (map != nil) return map;
@@ -141,18 +143,30 @@ NCUControllerDelegate
     {
         NITServerCell *serverCell = (NITServerCell *)cell;
         
-        NITAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        NSPersistentStore *store = appDelegate.persistentStoreCoordinator.persistentStores.firstObject;
-        BOOL isiCloudOn = store.options[NSPersistentStoreUbiquitousContentURLKey] != nil;
-        
         UILabel *textLabel = serverCell.textLabel;
         UIImageView *imageView = serverCell.imageView;
 
         textLabel.text = @"iCloud";
         imageView.image = [UIImage imageNamed:@"iconiCloud"];
         
+        NITAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        NSPersistentStore *store = appDelegate.persistentStoreCoordinator.persistentStores.firstObject;
+        BOOL isiCloudOn = store.options[NSPersistentStoreUbiquitousContentURLKey] != nil;
         imageView.alpha = textLabel.alpha = isiCloudOn ? 1.0f : 0.5f;
     }
+    else if ([@"Synchronize" isEqual:item])
+    {
+        UILabel *textLabel = cell.textLabel;
+        
+        NMBPromise *syncPromise = self.base.defaultServer.syncPromise;
+        
+        textLabel.text = syncPromise == nil ?
+        @"Synchronize" :
+        [[NSString alloc] initWithFormat:@"Synchronizing %3.0f%%", syncPromise.progress];
+        
+        textLabel.alpha = [indexPath isEqual:[self tableView:self.tableView willSelectRowAtIndexPath:indexPath]] ? 1.0f : 0.5f;
+    }
+    
     
     /* Remove
     switch (indexPath.section) {
@@ -229,6 +243,81 @@ NCUControllerDelegate
         userDefaults.isiCloudOn = targetiCloudState;
 }
 
+- (void)modifySynchronizeState
+{
+    NMBServer *server = self.base.defaultServer;
+    if (!server.isInitialized) return;
+    
+    if (server.isSynchronizing)
+        [server.syncPromise cancel];
+    else
+        [self synchronizeWithOptions:nil];
+}
+
+- (void)synchronizeWithOptions:(NSDictionary *)options
+{
+    NMBServer *server = self.base.defaultServer;
+    if (!server.isInitialized || server.isSynchronizing) return;
+    
+    NMBPromise *syncPromise = options == nil ?
+    [server synchronize] :
+    [server synchronizeWithOptions:options];
+
+    typeof(self) bSelf = self;
+    [syncPromise response:
+     ^(NMBPromise *promise, id response, NSError *error)
+     {
+         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
+                                withRowAnimation:UITableViewRowAnimationFade];
+     }];
+    [syncPromise fail:
+     ^(NMBPromise *promise, NSError *error)
+     {
+         if (promise.response.isCancelled)
+             return;
+         
+         if ([NValSynchronizeErrorDomain isEqualToString:error.domain] &&
+             NValUnacquaintedStoreError == error.code)
+         {
+             UIAlertView
+             *alert = [[UIAlertView alloc] initWithTitle:error.domain
+                                                 message:[UIAlertView messageFromError:error]
+                                                delegate:self
+                                       cancelButtonTitle:@"Got it"
+                                       otherButtonTitles:@"Re-downloud", @"Re-upload", nil];
+             self.alertUnacquaintedStore = alert;
+             [alert show];
+             return;
+         }
+         
+         [[UIAlertView alertError:error] show];
+     }];
+    [syncPromise progress:
+     ^(NMBPromise *promise, float progress)
+     {
+         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
+                                withRowAnimation:UITableViewRowAnimationNone];
+     }];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (self.alertUnacquaintedStore == alertView)
+    {
+        switch (buttonIndex) {
+            case 1:
+                [self synchronizeWithOptions:@{NKeySyncCommitType: @(NMBSyncCommitTypePullEntirely)}];
+                break;
+            case 2:
+                [self synchronizeWithOptions:@{NKeySyncCommitType: @(NMBSyncCommitTypePushEntirely)}];
+                break;
+            case 0:
+            default:
+                break;
+        }
+    }
+}
+
 #pragma mark - Events
 
 - (void)handleUbiquityIdentityDidChangeNotification:(NSNotification *)notification
@@ -236,7 +325,7 @@ NCUControllerDelegate
     UITableView *tableView = self.tableView;
     if (!tableView) return;
     
-    [tableView reloadRowsAtIndexPaths:[self indexPathsByItems][@"iCloud"]
+    [tableView reloadRowsAtIndexPaths:[self indexPathsByItem][@"iCloud"]
                      withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -281,7 +370,7 @@ NCUControllerDelegate
     NSString *reuserID = nil;
     if ([item isKindOfClass:[NMBServer class]] || [@"iCloud" isEqualToString:item])
         reuserID = sCellReuseIDServer;
-    else if ([@"Playground" isEqual:item])
+    else if ([@"Playground" isEqual:item] || [@"Synchronize" isEqual:item])
         reuserID = sCellReuseIDPlayground;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuserID
@@ -307,6 +396,12 @@ NCUControllerDelegate
         [tableView reloadRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
     }
+    else if ([@"Synchronize" isEqual:item])
+    {
+        [self modifySynchronizeState];
+        [tableView reloadRowsAtIndexPaths:@[indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+    }
     
     /*
     switch (indexPath.section) {
@@ -321,6 +416,20 @@ NCUControllerDelegate
             break;
     }
      */
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id item = self.tableItems[indexPath.section][indexPath.row];
+    BOOL canSelect = YES;
+
+    if ([@"Synchronize" isEqual:item])
+    {
+        NMBServer *server = self.base.defaultServer;
+        canSelect = (server != nil) && server.isInitialized;
+    }
+    
+    return canSelect ? indexPath : nil;
 }
 
 #pragma mark - NCUModelViewControllerDataSource

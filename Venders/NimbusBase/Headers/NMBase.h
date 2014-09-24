@@ -11,7 +11,7 @@
 #import "NMBModelMapper.h"
 
 @class NSManagedObjectContext, NSPersistentStore, NSManagedObject;
-@class NMBPromise;
+@class NMBPromise, NMBServer;
 
 /**
  * NMBase is the root for all. It should be a singleton in project.
@@ -99,5 +99,7 @@
  * @discussion This method is supposed to be called when application is going to background or be terminated.
  */
 - (void)saveMOContext;
+
+- (NMBServer *)defaultServer;
 
 @end

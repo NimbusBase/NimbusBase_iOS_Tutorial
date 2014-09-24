@@ -14,6 +14,7 @@
 #import "UITableView+Quick.h"
 #import "UIView+AutoLayout.h"
 #import "NSArray+Quick.h"
+#import "UIAlertView+Quick.h"
 
 #import "NITFolderViewController.h"
 
@@ -282,11 +283,19 @@ static NSString
         case NMBAuthStateIn:
         {
             [server signOut];
-        }break;
+        }
+            break;
         case NMBAuthStateOut:
         {
-            [server authorizeWithController:self];
-        }break;
+            if (server.base.defaultServer == nil)
+                [server authorizeWithController:self];
+            else
+            {
+                [[UIAlertView alertTitle:@"Already signed in"
+                                 message:@"Please sign out other servers before you sign in this"] show];
+            }
+        }
+            break;
         default:
             break;
     }
