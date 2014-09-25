@@ -14,45 +14,47 @@
 
 @implementation NITServerCell
 
-static NSString * const kvo_authState = @"authState";
-static NSString * const kvo_isInitialized = @"isInitialized";
-
-- (void)dealloc{
+- (void)dealloc
+{
     self.server = nil;
 }
 
-- (void)setServer:(NMBServer *)server{
-    
-    if (_server) {
+- (void)setServer:(NMBServer *)server
+{
+    if (_server)
+    {
         [self ignoreServer:_server];
     }
     
     _server = server;
     
-    if (_server) {
+    if (_server)
+    {
         [self observeServer:_server];
     }
     
 }
 
-- (void)observeServer:(NMBServer *)server{
+- (void)observeServer:(NMBServer *)server
+{
     self.textLabel.text = server.cloudType;
     self.imageView.image = [UIImage imageNamed:server.iconName];
-    [server addObserver:self forKeyPath:kvo_authState options:kvoOptNOI context:nil];
+    [server addObserver:self forKeyPath:NMBServerProperties.authState options:kvoOptNOI context:nil];
 }
 
-- (void)ignoreServer:(NMBServer *)server{
-    [server removeObserver:self forKeyPath:kvo_authState];
+- (void)ignoreServer:(NMBServer *)server
+{
+    [server removeObserver:self forKeyPath:NMBServerProperties.authState];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    if ([keyPath isEqualToString:kvo_authState]) {
-        
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:NMBServerProperties.authState])
+    {
         kvo_QuickComparison(NSNumber)
         
         self.detailTextLabel.text = [NMBServer authStateString:new.integerValue];
         self.imageView.alpha = self.textLabel.alpha = (new.integerValue == NMBAuthStateIn) ? 1.0f : 0.5f;
-        
     }
 }
 

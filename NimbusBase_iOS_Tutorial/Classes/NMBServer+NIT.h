@@ -10,17 +10,14 @@
 
 @interface NMBServer (NIT)
 
-@property(nonatomic, readonly)NSString *authStateAction;
-
-- (NSString *)authStateAction;
+@property (nonatomic, readonly) NSString
+*authStateAction,
+*syncStateAction,
+*cloudType,
+*iconName;
 
 + (NSString *)authStateActionString:(NMBAuthState)state;
 
 + (NSString *)authStateString:(NMBAuthState)state;
 
-- (NSString *)cloudType;
-
-- (NSString *)iconName;
-
-- (NSString *)syncStateAction;
 @end

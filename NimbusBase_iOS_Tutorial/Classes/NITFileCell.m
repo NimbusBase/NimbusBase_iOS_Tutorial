@@ -27,15 +27,15 @@
     // Configure the view for the selected state
 }
 
-- (void)setFile:(NMBFile *)file{
-    
+- (void)setFile:(NMBFile *)file
+{
     _file = file;
     
-    if (_file) {
+    if (_file)
+    {
         self.textLabel.text = _file.name;
         self.detailTextLabel.text = _file.mime;
     }
-    
 }
 
 @end

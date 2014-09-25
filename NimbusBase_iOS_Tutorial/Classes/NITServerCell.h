@@ -11,5 +11,6 @@
 @class NMBServer;
 
 @interface NITServerCell : UITableViewCell
-@property(nonatomic, weak)NMBServer *server;
+@property (nonatomic, weak) NMBServer *server;
+
 @end

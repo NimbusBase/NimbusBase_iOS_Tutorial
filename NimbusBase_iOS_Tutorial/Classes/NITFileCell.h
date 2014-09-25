@@ -11,5 +11,5 @@
 @class NMBFile;
 
 @interface NITFileCell : UITableViewCell
-@property(nonatomic, strong)NMBFile *file;
+@property (nonatomic, strong) NMBFile *file;
 @end
