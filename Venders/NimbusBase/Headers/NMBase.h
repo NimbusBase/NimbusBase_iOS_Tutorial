@@ -19,11 +19,6 @@
 @interface NMBase : NSObject <NMBSerializer>
 
 /**
- * @brief The servers decribed in configs will be instantiated and can be access via this property.
- */
-@property (nonatomic, readonly) NSArray *servers;
-
-/**
  * @brief The only init method shoud be used on NMBase.
  * 
  * @param psc The NSPersistentStoreCoordinator your NSManagedObjectContext is base on.
@@ -34,6 +29,16 @@
  * @discussion This instance contains information of your model and the stored data of your application, base on which NMBase will access your data and transfer them to the cloud.
  */
 - (id)initWithPSCoordinator:(NSPersistentStoreCoordinator *)psc configs:(NSDictionary *)cfgs;
+
+#pragma mark - Server
+
+/**
+ * @brief The servers decribed in configs will be instantiated and can be access via this property.
+ */
+@property (nonatomic, readonly) NSArray *servers;
+
+@property (nonatomic, readonly, weak) NMBServer *defaultServer;
+
 
 #pragma mark - App Events
 
@@ -99,7 +104,5 @@
  * @discussion This method is supposed to be called when application is going to background or be terminated.
  */
 - (void)saveMOContext;
-
-- (NMBServer *)defaultServer;
 
 @end

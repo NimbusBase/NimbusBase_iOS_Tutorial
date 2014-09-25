@@ -83,6 +83,10 @@ NCUControllerDelegate
                    selector:@selector(handleUbiquityIdentityDidChangeNotification:)
                        name:NSUbiquityIdentityDidChangeNotification
                      object:nil];
+    [ntfctnCntr addObserver:self
+                   selector:@selector(handleDefaultServerDidChangeNotification:)
+                       name:NMBNotiDefaultServerDidChange
+                     object:self.base];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -93,6 +97,9 @@ NCUControllerDelegate
     [ntfctnCntr removeObserver:self
                           name:NSUbiquityIdentityDidChangeNotification
                         object:nil];
+    [ntfctnCntr removeObserver:self
+                          name:NMBNotiDefaultServerDidChange
+                        object:self.base];
 }
 
 - (void)didReceiveMemoryWarning
@@ -162,7 +169,7 @@ NCUControllerDelegate
         
         textLabel.text = syncPromise == nil ?
         @"Synchronize" :
-        [[NSString alloc] initWithFormat:@"Synchronizing %3.0f%%", syncPromise.progress];
+        [[NSString alloc] initWithFormat:@"Synchronizing %3.0f%%", syncPromise.progress * 100];
         
         textLabel.alpha = [indexPath isEqual:[self tableView:self.tableView willSelectRowAtIndexPath:indexPath]] ? 1.0f : 0.5f;
     }
@@ -263,14 +270,17 @@ NCUControllerDelegate
     [server synchronize] :
     [server synchronizeWithOptions:options];
 
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
     typeof(self) bSelf = self;
-    [syncPromise response:
+    [syncPromise onQueue:mainQueue
+                response:
      ^(NMBPromise *promise, id response, NSError *error)
      {
          [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
                                 withRowAnimation:UITableViewRowAnimationFade];
      }];
-    [syncPromise fail:
+    [syncPromise  onQueue:mainQueue
+                     fail:
      ^(NMBPromise *promise, NSError *error)
      {
          if (promise.response.isCancelled)
@@ -292,7 +302,8 @@ NCUControllerDelegate
          
          [[UIAlertView alertError:error] show];
      }];
-    [syncPromise progress:
+    [syncPromise onQueue:mainQueue
+                progress:
      ^(NMBPromise *promise, float progress)
      {
          [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
@@ -326,6 +337,15 @@ NCUControllerDelegate
     if (!tableView) return;
     
     [tableView reloadRowsAtIndexPaths:[self indexPathsByItem][@"iCloud"]
+                     withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)handleDefaultServerDidChangeNotification:(NSNotification *)notification
+{
+    UITableView *tableView = self.tableView;
+    if (!tableView) return;
+    
+    [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"Synchronize"]]
                      withRowAnimation:UITableViewRowAnimationFade];
 }
 

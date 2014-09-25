@@ -37,3 +37,6 @@ extern NSString
 
 extern NSString
 *const NCfgK_ParallelPromiseCount;
+
+extern NSString
+*const NCfgK_AllowMutipleServers;

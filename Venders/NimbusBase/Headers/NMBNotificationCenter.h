@@ -35,6 +35,10 @@ extern NSString
 *const NMBNotiSyncDidSucceed,
 *const NMBNotiSyncDidFail;
 
+extern NSString
+*const NMBNotiDefaultServerDidChange;
+
+
 /** This category is used by NimbusBase to post notifications via NSNotificationCenter.
  
  The supported names of notifications by now.
