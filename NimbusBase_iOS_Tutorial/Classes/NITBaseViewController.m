@@ -237,21 +237,6 @@ NCUControllerDelegate
         
         textLabel.alpha = [indexPath isEqual:[self tableView:self.tableView willSelectRowAtIndexPath:indexPath]] ? 1.0f : 0.5f;
     }
-    
-    
-    /* Remove
-    switch (indexPath.section) {
-        case 0:{
-            NMBServer *server = self.servers[indexPath.row];
-            ((NITServerCell *)cell).server = server;
-        }break;
-        case 1:
-            cell.textLabel.text = @"Playground";
-            break;
-        default:
-            break;
-    }
-     */
 }
 
 - (UITableView *)tableView
@@ -356,31 +341,10 @@ NCUControllerDelegate
 {
     NSArray *subItems = self.tableItems[section];
     return subItems.count;
-    /* Remove
-    switch (section) {
-        case 0:
-            return self.servers.count;
-            break;
-        case 1:
-            return 1;
-            break;
-        default:
-            break;
-    }
-    
-    return 0;
-     */
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /* Remove
-    static NSArray *identifiers = nil;
-    if (identifiers == nil)
-        identifiers = @[sCellReuseIDServer, sCellReuseIDPlayground];
-     */
-
-    
     id item = self.tableItems[indexPath.section][indexPath.row];
     
     NSString *reuserID = nil;
@@ -472,19 +436,7 @@ NCUControllerDelegate
         map = @{
                 @"User": @"name",
                 };
-    /* Remove
-    NSArray *sortDescriptors = nil;
-    NSString *name = entity.name;
-    if ([name isEqualToString:@"User"]) {
-        sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES]];
-    }
-    else if ([name isEqualToString:@"Test"]) {
-        sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"create_time" ascending:YES]];
-    }
-    else if ([name isEqualToString:@"Player"]) {
-        sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"user.name" ascending:YES]];
-    }
-    */
+
     return @[
              [[NSSortDescriptor alloc] initWithKey:map[entity.name]
                                          ascending:YES],
@@ -499,19 +451,6 @@ NCUControllerDelegate
                 @"User": @"name",
                 };
 
-    /* Remove
-    NSString *keyPath = nil;
-    NSString *name = entity.name;
-    if ([name isEqualToString:@"User"]) {
-        keyPath = @"name";
-    }
-    else if ([name isEqualToString:@"Test"]) {
-        keyPath = @"point";
-    }
-    else if ([name isEqualToString:@"Player"]) {
-        keyPath = @"user.name";
-    }
-    */
     return map[entity.name];
 }
 

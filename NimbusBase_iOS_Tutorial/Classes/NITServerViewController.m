@@ -31,9 +31,7 @@ static NSString
 @interface NITServerViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-/* Remove
-@property (nonatomic, weak) NMBPromise *syncingPromise;
-*/
+
 @end
 
 @implementation NITServerViewController
@@ -76,9 +74,6 @@ static NSString
 - (void)dealloc
 {
     self.server = nil;
-    /*
-    self.syncingPromise = nil;
-     */
 }
 
 #pragma mark - Models
@@ -89,9 +84,6 @@ static NSString
     {
         [_server removeObserver:self forKeyPath:NMBServerProperties.authState];
         [_server removeObserver:self forKeyPath:NMBServerProperties.isInitialized];
-        /* Remove
-        [_server removeObserver:self forKeyPath:kvo_syncPromise];
-         */
     }
     
     _server = server;
@@ -100,41 +92,9 @@ static NSString
     {
         [_server addObserver:self forKeyPath:NMBServerProperties.authState options:kvoOptNOI context:nil];
         [_server addObserver:self forKeyPath:NMBServerProperties.isInitialized options:kvoOptNOI context:nil];
-        /* Remove
-        [_server addObserver:self forKeyPath:kvo_syncPromise options:kvoOptNOI context:nil];
-         */
     }
 }
-/* Remove
 
-- (void)setSyncingPromise:(NMBPromise *)syncingPromise
-{
-    if (_syncingPromise)
-    {
-        [_syncingPromise removeObserver:self
-                             forKeyPath:NMBPromiseProperties.progress];
-    }
-    
-    _syncingPromise = syncingPromise;
-    
-    if (_syncingPromise)
-    {
-        [_syncingPromise addObserver:self
-                          forKeyPath:NMBPromiseProperties.progress
-                             options:kvoOptNOI
-                             context:nil];
-        
-        [_syncingPromise onQueue:dispatch_get_main_queue() fail:
-         ^(NMBPromise *promise, NSError *error)
-         {
-             if (promise.response.isCancelled)
-                 return;
-             
-             NSLog(@"%@", error);
-         }];
-    }
-}
-*/
 + (NSArray *)items
 {
     static NSArray *items = nil;
@@ -144,9 +104,6 @@ static NSString
     @[
       @[@"Browser",],
       @[@"Auth",],
-      /* Remove
-      @[@"Sync",],
-       */
       ];
 }
 
@@ -205,73 +162,6 @@ static NSString
     {
         textLabel.text = server.authStateAction;
     }
-    /* Remove
-
-    else if ([@"Sync" isEqualToString:key])
-    {
-        textLabel.text = server.syncStateAction;
-        
-        if (!server.isSynchronizing)
-            detailTextLabel.text = @"";
-    }
-*/
-    /* Remove
-    NMBServer *server = self.server;
-    
-    switch (indexPath.section) {
-        case 0:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    cell.textLabel.text = @"Browser";
-                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 1:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    cell.textLabel.text = server.authStateAction;
-                    
-                    NMBAuthState authState = server.authState;
-                    cell.textLabel.alpha =
-                    (authState == NMBAuthStateIn || authState == NMBAuthStateOut)
-                    ? 1.0f : 0.5f;
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 2:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    cell.textLabel.text = server.syncStateAction;
-                    cell.textLabel.alpha = server.isInitialized ? 1.0f : 0.5f;
-                    if (!server.isSynchronizing) {
-                        cell.detailTextLabel.text = @"";
-                    }
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        default:
-            break;
-    }
-    */
 }
 
 #pragma mark - Actions
@@ -311,32 +201,14 @@ static NSString
             break;
     }
 }
-/* Remove
-- (void)modifySyncState:(NMBServer *)server
-{
-    if (server.isSynchronizing)
-    {
-        [server.syncPromise cancel];
-    }
-    else
-    {
-        [server synchronize];
-    }
-}
-*/
+
+#pragma mark - Events
+
 - (void)handleServerStateChange
 {
     NSArray
-    *indexPaths = [self.class.indexPathsByItem objectsForKeys:
-                   @[
-                     @"Browser",
-                     @"Auth",
-                     /* Remove
-                     @"Sync",
-                      */
-                     ]
+    *indexPaths = [self.class.indexPathsByItem objectsForKeys:@[@"Browser", @"Auth",]
                                                notFoundMarker:[NSNull null]];
-    
     
     typeof(self) bSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -344,36 +216,7 @@ static NSString
                                withRowAnimation:UITableViewRowAnimationFade];
     });
 }
-/* Remove
 
-- (void)handleSyncPromiseChange:(NMBPromise *)syncPromise
-{
-    self.syncingPromise = syncPromise;
-    NSIndexPath *indexPath = self.class.indexPathsByItem[@"Sync"];
-    BOOL isNil = syncPromise == nil;
-    
-    typeof(self) bSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UITableViewCell *cell = [bSelf.tableView cellForRowAtIndexPath:indexPath];
-        cell.detailTextLabel.text = isNil ? @"" : @"%0";
-        
-        [bSelf.tableView reloadRowsAtIndexPaths:@[indexPath]
-                               withRowAnimation:UITableViewRowAnimationFade];
-    });
-}
-
-- (void)handleSyncPromiseUpdate:(NSNumber *)progress
-{
-    typeof(self) bSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
-        UITableViewCell *cell = [bSelf.tableView cellForRowAtIndexPath:indexPath];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%3.0f%%", 100 * progress.floatValue];
-        [cell setNeedsDisplay];
-        [cell setNeedsLayout];
-    });
-}
-*/
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -385,27 +228,7 @@ static NSString
         {
             [self handleServerStateChange];
         }
-        /* Remove
-
-        else if ([keyPath isEqualToString:kvo_syncPromise])
-        {
-            NMBPromise *promise = change[NSKeyValueChangeNewKey];
-            if ([promise isKindOfClass:[NSNull class]]) promise = nil;
-            [self handleSyncPromiseChange:promise];
-        }
-         */
     }
-    /* Remove
-
-    else if (object == self.syncingPromise)
-    {
-        if ([keyPath isEqualToString:NMBPromiseProperties.progress])
-        {
-            kvo_QuickComparison(NSNumber);
-            [self handleSyncPromiseUpdate:new];
-        }
-    }
-     */
 }
 
 #pragma mark - UITableViewDelegate
@@ -428,63 +251,7 @@ static NSString
         NMBAuthState state = server.authState;
         canBeSelected = (state == NMBAuthStateIn || state == NMBAuthStateOut);
     }
-    
-    /* Remove
 
-    else if ([@"Sync" isEqualToString:key])
-    {
-        canBeSelected = server.isInitialized;
-    }
-    */
-    /*
-    NMBServer *server = self.server;
-    BOOL canBeSelected = NO;
-    
-    switch (indexPath.section) {
-        case 0:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    canBeSelected = server.isInitialized;
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 1:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    NMBAuthState state = server.authState;
-                    canBeSelected = (state == NMBAuthStateIn || state == NMBAuthStateOut);
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 2:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    canBeSelected = server.isInitialized;
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        default:
-            break;
-    }
-    */
     return canBeSelected ? indexPath : nil;
 }
 
@@ -504,64 +271,6 @@ static NSString
         [self modifyAuthState:server];
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    
-    /* Remove
-
-    else if ([@"Sync" isEqualToString:key])
-    {
-        [self modifySyncState:server];
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-*/
-    /* Remove
-    NMBServer *server = self.server;
-    
-    switch (indexPath.section) {
-        case 0:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    [self pushBrowser:server];
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 1:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    [self modifyAuthState:server];
-                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-                    
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        case 2:{
-            
-            switch (indexPath.row) {
-                case 0:{
-                    
-                    [self modifySyncState:server];
-                    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-                }break;
-                default:
-                    break;
-            }
-            
-        }break;
-        default:
-            break;
-    }
-*/
 }
 
 #pragma mark - UITableViewDatasource
@@ -602,35 +311,6 @@ static NSString
         }
     }
 
-    /* Remove
-    UITableViewCell
-    *cell = nil;
-    switch (indexPath.section) {
-        case 0:{
-            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseBrowser];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:vCellReuseBrowser];
-            }
-        }break;
-        case 1:{
-            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseAuth];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:vCellReuseAuth];
-            }
-        }break;
-        case 2:{
-            cell = [tableView dequeueReusableCellWithIdentifier:vCellReuseSync];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
-                                              reuseIdentifier:vCellReuseSync];
-            }
-        }break;
-        default:
-            break;
-    }
-    */
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
