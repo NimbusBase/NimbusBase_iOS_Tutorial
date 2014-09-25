@@ -83,10 +83,13 @@ NCUControllerDelegate
                    selector:@selector(handleUbiquityIdentityDidChangeNotification:)
                        name:NSUbiquityIdentityDidChangeNotification
                      object:nil];
+    [self handleUbiquityIdentityDidChangeNotification:nil];
+
     [ntfctnCntr addObserver:self
                    selector:@selector(handleDefaultServerDidChangeNotification:)
                        name:NMBNotiDefaultServerDidChange
                      object:self.base];
+    [self handleDefaultServerDidChangeNotification:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -106,6 +109,67 @@ NCUControllerDelegate
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Nimbus Base
+
+- (void)synchronizeWithOptions:(NSDictionary *)options
+{
+    NMBServer *server = self.base.defaultServer;
+    if (!server.isInitialized || server.isSynchronizing) return;
+    
+    NMBPromise *syncPromise = options == nil ?
+    [server synchronize] :
+    [server synchronizeWithOptions:options];
+    
+    dispatch_queue_t mainQueue = dispatch_get_main_queue();
+    typeof(self) bSelf = self;
+    [syncPromise onQueue:mainQueue
+                response:
+     ^(NMBPromise *promise, id response, NSError *error)
+     {
+         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
+                                withRowAnimation:UITableViewRowAnimationFade];
+     }];
+    [syncPromise  onQueue:mainQueue
+                     fail:
+     ^(NMBPromise *promise, NSError *error)
+     {
+         if (promise.response.isCancelled)
+             return;
+         
+         if ([NValSynchronizeErrorDomain isEqualToString:error.domain] &&
+             NValUnacquaintedStoreError == error.code)
+         {
+             UIAlertView
+             *alert = [[UIAlertView alloc] initWithTitle:error.domain
+                                                 message:[UIAlertView messageFromError:error]
+                                                delegate:self
+                                       cancelButtonTitle:@"Got it"
+                                       otherButtonTitles:@"Re-downloud", @"Re-upload", nil];
+             self.alertUnacquaintedStore = alert;
+             [alert show];
+             return;
+         }
+         
+         [[UIAlertView alertError:error] show];
+     }];
+    [syncPromise onQueue:mainQueue
+                progress:
+     ^(NMBPromise *promise, float progress)
+     {
+         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
+                                withRowAnimation:UITableViewRowAnimationNone];
+     }];
+}
+
+- (void)handleDefaultServerDidChangeNotification:(NSNotification *)notification
+{
+    UITableView *tableView = self.tableView;
+    if (!tableView) return;
+    
+    [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"Synchronize"]]
+                     withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - Models
@@ -250,66 +314,18 @@ NCUControllerDelegate
         userDefaults.isiCloudOn = targetiCloudState;
 }
 
-- (void)modifySynchronizeState
+#pragma mark - Events
+
+- (void)handleUbiquityIdentityDidChangeNotification:(NSNotification *)notification
 {
-    NMBServer *server = self.base.defaultServer;
-    if (!server.isInitialized) return;
+    UITableView *tableView = self.tableView;
+    if (!tableView) return;
     
-    if (server.isSynchronizing)
-        [server.syncPromise cancel];
-    else
-        [self synchronizeWithOptions:nil];
+    [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"iCloud"]]
+                     withRowAnimation:UITableViewRowAnimationFade];
 }
 
-- (void)synchronizeWithOptions:(NSDictionary *)options
-{
-    NMBServer *server = self.base.defaultServer;
-    if (!server.isInitialized || server.isSynchronizing) return;
-    
-    NMBPromise *syncPromise = options == nil ?
-    [server synchronize] :
-    [server synchronizeWithOptions:options];
-
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    typeof(self) bSelf = self;
-    [syncPromise onQueue:mainQueue
-                response:
-     ^(NMBPromise *promise, id response, NSError *error)
-     {
-         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
-                                withRowAnimation:UITableViewRowAnimationFade];
-     }];
-    [syncPromise  onQueue:mainQueue
-                     fail:
-     ^(NMBPromise *promise, NSError *error)
-     {
-         if (promise.response.isCancelled)
-             return;
-         
-         if ([NValSynchronizeErrorDomain isEqualToString:error.domain] &&
-             NValUnacquaintedStoreError == error.code)
-         {
-             UIAlertView
-             *alert = [[UIAlertView alloc] initWithTitle:error.domain
-                                                 message:[UIAlertView messageFromError:error]
-                                                delegate:self
-                                       cancelButtonTitle:@"Got it"
-                                       otherButtonTitles:@"Re-downloud", @"Re-upload", nil];
-             self.alertUnacquaintedStore = alert;
-             [alert show];
-             return;
-         }
-         
-         [[UIAlertView alertError:error] show];
-     }];
-    [syncPromise onQueue:mainQueue
-                progress:
-     ^(NMBPromise *promise, float progress)
-     {
-         [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
-                                withRowAnimation:UITableViewRowAnimationNone];
-     }];
-}
+#pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -327,26 +343,6 @@ NCUControllerDelegate
                 break;
         }
     }
-}
-
-#pragma mark - Events
-
-- (void)handleUbiquityIdentityDidChangeNotification:(NSNotification *)notification
-{
-    UITableView *tableView = self.tableView;
-    if (!tableView) return;
-    
-    [tableView reloadRowsAtIndexPaths:[self indexPathsByItem][@"iCloud"]
-                     withRowAnimation:UITableViewRowAnimationFade];
-}
-
-- (void)handleDefaultServerDidChangeNotification:(NSNotification *)notification
-{
-    UITableView *tableView = self.tableView;
-    if (!tableView) return;
-    
-    [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"Synchronize"]]
-                     withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - UITableViewDataSource
@@ -418,7 +414,15 @@ NCUControllerDelegate
     }
     else if ([@"Synchronize" isEqual:item])
     {
-        [self modifySynchronizeState];
+        NMBServer *server = self.base.defaultServer;
+        if (server.isInitialized)
+        {
+            if (server.isSynchronizing)
+                [server.syncPromise cancel];
+            else
+                [self synchronizeWithOptions:nil];
+        }
+
         [tableView reloadRowsAtIndexPaths:@[indexPath]
                          withRowAnimation:UITableViewRowAnimationFade];
     }
