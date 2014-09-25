@@ -21,6 +21,7 @@
 		BE3F87A819D29C27003F8B3B /* NSArray+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */; };
 		BE3F87AB19D29FB6003F8B3B /* NSUserDefaults+NIT.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F87AA19D29FB6003F8B3B /* NSUserDefaults+NIT.m */; };
 		BE3F87AF19D2B9EE003F8B3B /* UIAlertView+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3F87AE19D2B9EE003F8B3B /* UIAlertView+Quick.m */; };
+		BEA9FE8A19D3FC2C0011C24C /* NSManagedObjectContext+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA9FE8919D3FC2C0011C24C /* NSManagedObjectContext+Quick.m */; };
 		BEAC203A18A385AF00BBC60E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203918A385AF00BBC60E /* Foundation.framework */; };
 		BEAC203C18A385AF00BBC60E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */; };
 		BEAC203E18A385AF00BBC60E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEAC203D18A385AF00BBC60E /* UIKit.framework */; };
@@ -100,6 +101,8 @@
 		BE85B2BD19D19EF800CC49C7 /* NMBResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBResponse.h; sourceTree = "<group>"; };
 		BE85B2BE19D19EF800CC49C7 /* NSPersistentStoreCoordinator+NMB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPersistentStoreCoordinator+NMB.h"; sourceTree = "<group>"; };
 		BE85B2BF19D1A0BC00CC49C7 /* NMBCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NMBCallback.h; sourceTree = "<group>"; };
+		BEA9FE8819D3FC2C0011C24C /* NSManagedObjectContext+Quick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Quick.h"; sourceTree = "<group>"; };
+		BEA9FE8919D3FC2C0011C24C /* NSManagedObjectContext+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Quick.m"; sourceTree = "<group>"; };
 		BEAC203618A385AE00BBC60E /* NimbusBase_iOS_Tutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NimbusBase_iOS_Tutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAC203918A385AF00BBC60E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BEAC203B18A385AF00BBC60E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -428,6 +431,8 @@
 				BE3F87A719D29C27003F8B3B /* NSArray+Quick.m */,
 				BE3F87AD19D2B9EE003F8B3B /* UIAlertView+Quick.h */,
 				BE3F87AE19D2B9EE003F8B3B /* UIAlertView+Quick.m */,
+				BEA9FE8819D3FC2C0011C24C /* NSManagedObjectContext+Quick.h */,
+				BEA9FE8919D3FC2C0011C24C /* NSManagedObjectContext+Quick.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -548,6 +553,7 @@
 				BE2170A31986377100D0A232 /* NCUEntityViewController.m in Sources */,
 				BE3F87AF19D2B9EE003F8B3B /* UIAlertView+Quick.m in Sources */,
 				BE2170A61986377100D0A232 /* NCUObjectPickerViewController.m in Sources */,
+				BEA9FE8A19D3FC2C0011C24C /* NSManagedObjectContext+Quick.m in Sources */,
 				BEAC204C18A385AF00BBC60E /* NITAppDelegate.m in Sources */,
 				BEB4408B18A48A9300CF839A /* UIView+AutoLayout.m in Sources */,
 				BE2170A91986377100D0A232 /* NSPropertyDescription+NCU.m in Sources */,

@@ -10,6 +10,7 @@
 #import "NimbusBase.h"
 #import "NITBaseViewController.h"
 #import "NSUserDefaults+NIT.h"
+#import "NSManagedObjectContext+Quick.h"
 
 @implementation NITAppDelegate
 
@@ -226,16 +227,36 @@
     }
     
     NSURL *storeURL = [self persistentStoreURLiCloudOn:iCloudOn];
+
     NSError *error = nil;
-    if (![_persistentStoreCoordinator migratePersistentStore:currentStore
-                                                       toURL:storeURL
-                                                     options:options
-                                                    withType:NSSQLiteStoreType
-                                                       error:&error]) {
-        NSLog(@"Unresolved error %@, \n%@", error, [error userInfo]);
-        abort();
-    }
+
+    // Clean destination store
     
+    NSPersistentStoreCoordinator
+    *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_persistentStoreCoordinator.managedObjectModel];
+    [psc addPersistentStoreWithType:NSSQLiteStoreType
+                      configuration:nil
+                                URL:storeURL
+                            options:options
+                              error:&error];
+    NSAssert(error == nil, @"\n%@", error);
+
+    NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] init];
+    moc.persistentStoreCoordinator = psc;
+    [moc deleteAllManagedObjects];
+    [moc save:&error];
+    NSAssert(error == nil, @"\n%@", error);
+
+    
+    // Migrate to destination store
+    
+    [_persistentStoreCoordinator migratePersistentStore:currentStore
+                                                  toURL:storeURL
+                                                options:options
+                                               withType:NSSQLiteStoreType
+                                                  error:&error];
+    NSAssert(error == nil, @"\n%@", error);
+
     return error == nil;
 }
 
