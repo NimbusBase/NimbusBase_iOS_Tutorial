@@ -90,6 +90,11 @@ NCUControllerDelegate
                        name:NMBNotiDefaultServerDidChange
                      object:self.base];
     [self handleDefaultServerDidChangeNotification:nil];
+    
+    [ntfctnCntr addObserver:self
+                   selector:@selector(handleNMBServerSyncDidFail:)
+                       name:NMBNotiSyncDidFail
+                     object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -103,6 +108,9 @@ NCUControllerDelegate
     [ntfctnCntr removeObserver:self
                           name:NMBNotiDefaultServerDidChange
                         object:self.base];
+    [ntfctnCntr removeObserver:self
+                          name:NMBNotiSyncDidFail
+                        object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,40 +130,15 @@ NCUControllerDelegate
     [server synchronize] :
     [server synchronizeWithOptions:options];
     
-    dispatch_queue_t mainQueue = dispatch_get_main_queue();
     typeof(self) bSelf = self;
-    [syncPromise onQueue:mainQueue
-                response:
+    [syncPromise response:
      ^(NMBPromise *promise, id response, NSError *error)
      {
          [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
                                 withRowAnimation:UITableViewRowAnimationFade];
      }];
-    [syncPromise  onQueue:mainQueue
-                     fail:
-     ^(NMBPromise *promise, NSError *error)
-     {
-         if (promise.response.isCancelled)
-             return;
-         
-         if ([NValSynchronizeErrorDomain isEqualToString:error.domain] &&
-             NValUnacquaintedStoreError == error.code)
-         {
-             UIAlertView
-             *alert = [[UIAlertView alloc] initWithTitle:error.domain
-                                                 message:[UIAlertView messageFromError:error]
-                                                delegate:self
-                                       cancelButtonTitle:@"Got it"
-                                       otherButtonTitles:@"Re-downloud", @"Re-upload", nil];
-             self.alertUnacquaintedStore = alert;
-             [alert show];
-             return;
-         }
-         
-         [[UIAlertView alertError:error] show];
-     }];
-    [syncPromise onQueue:mainQueue
-                progress:
+
+    [syncPromise progress:
      ^(NMBPromise *promise, float progress)
      {
          [bSelf.tableView reloadRowsAtIndexPaths:@[bSelf.indexPathsByItem[@"Synchronize"]]
@@ -166,10 +149,33 @@ NCUControllerDelegate
 - (void)handleDefaultServerDidChangeNotification:(NSNotification *)notification
 {
     UITableView *tableView = self.tableView;
-    if (!tableView) return;
+    if (tableView != nil)
+        [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"Synchronize"]]
+                         withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)handleNMBServerSyncDidFail:(NSNotification *)notification
+{
+    if (notification.object != self.base.defaultServer) return;
+
+    NSError *error = notification.userInfo[NKeyNotiError];
+    NSString *domain = error.domain;
+    NSInteger code = error.code;
     
-    [tableView reloadRowsAtIndexPaths:@[[self indexPathsByItem][@"Synchronize"]]
-                     withRowAnimation:UITableViewRowAnimationFade];
+    if ([NMBPromiseErrorDomain isEqualToString:domain] && NMBPromiseCancelError == code)
+        return;
+    else if ([NValSynchronizeErrorDomain isEqualToString:domain] && NValUnacquaintedStoreError == code)
+    {
+        UIAlertView
+        *alert = [[UIAlertView alloc] initWithTitle:error.domain
+                                            message:[UIAlertView messageFromError:error]
+                                           delegate:self
+                                  cancelButtonTitle:@"Got it"
+                                  otherButtonTitles:@"Re-downloud", @"Re-upload", nil];
+        self.alertUnacquaintedStore = alert;
+        [alert show];
+        return;
+    }
 }
 
 #pragma mark - Models
