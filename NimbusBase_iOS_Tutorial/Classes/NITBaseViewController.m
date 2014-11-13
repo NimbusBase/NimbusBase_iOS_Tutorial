@@ -131,6 +131,12 @@ NCUControllerDelegate
     [server synchronizeWithOptions:options];
     
     typeof(self) bSelf = self;
+    
+    [syncPromise fail:^(NMBPromise *promise, NSError *error) {
+        if (promise.response.isCancelled) return;
+        [[UIAlertView alertError:error] show];
+    }];
+    
     [syncPromise response:
      ^(NMBPromise *promise, id response, NSError *error)
      {
