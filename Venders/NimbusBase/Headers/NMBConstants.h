@@ -32,9 +32,3 @@ extern NSString
 
 extern NSString
 *const NKeySyncCommitType;
-
-typedef NS_ENUM(NSUInteger, NMBSyncCommitType) {
-    NMBSyncCommitTypeNormal,
-    NMBSyncCommitTypePushEntirely,
-    NMBSyncCommitTypePullEntirely
-};

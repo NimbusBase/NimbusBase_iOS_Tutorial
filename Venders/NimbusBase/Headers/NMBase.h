@@ -14,7 +14,7 @@
 @class NMBPromise, NMBServer;
 
 /**
- * NMBase is the root for all. It should be a singleton in project.
+ * NMBase is the root for all. It should be a singleton in project or bound with NSPersistentStoreCoordinator.
  */
 @interface NMBase : NSObject <NMBSerializer>
 
@@ -37,6 +37,11 @@
  */
 @property (nonatomic, readonly) NSArray *servers;
 
+/**
+ * @brief The only initialized server of the reciever.
+ *
+ * @discussion This property is only available when the NCfgK_AllowMutipleServers set to NO in the configs passed into the init method, otherwise it returns nil.
+ */
 @property (nonatomic, readonly, weak) NMBServer *defaultServer;
 
 
@@ -62,6 +67,10 @@
  * @discussion You are supposed not to use this context to CRUD your data, because it's created and runs on a private thread of NMBase. But you should add observer on NSNotificationCenter with event name NSManagedObjectContextDidSaveNotification. So that you can merge any changes NMBase fetching from cloud.
  */
 @property (nonatomic, readonly) NSManagedObjectContext *userMOContext;
+
+/**
+ * @brief The NSPersistentStoreCoordinator to which the reciever is bound to.
+ */
 @property (nonatomic, readonly, weak) NSPersistentStoreCoordinator *userPSCoordinator;
 
 /**
@@ -71,7 +80,12 @@
  */
 @property (nonatomic, weak) id<NMBSerializer> serializer;
 
-@property (nonatomic, weak) id<NMBModelMapper> modelMapper;
+/**
+ * @brief The instance that is responsible for mapping entities and properties among different versions of NSManagedObjectModel.
+ *
+ * @discussion If a model mapper is needed by the reciever, refer it by the key NCfgK_ModelMapper in the configs passed into the init method.
+ */
+@property (nonatomic, readonly, weak) id<NMBModelMapper> modelMapper;
 
 /**
  * @brief Track the changes of the user's NSManagedObjectContext.

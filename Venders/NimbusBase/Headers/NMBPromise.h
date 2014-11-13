@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, NMBPromiseState)
 @interface NMBPromise : NSObject
 
 /**
- * @brief Initializes and returns a newly allocated promise object with the userInfo.
+ * @brief Initialize a newly allocated promise object with the userInfo.
  *
  * @param userInfo An instance of NSDictionary that can be access in every blocks of the promise.
  */
@@ -80,12 +80,22 @@ typedef NS_ENUM(NSUInteger, NMBPromiseState)
 #pragma mark - Callbacks
 
 /**
- * @brief Add a response callback. Will be called on both success and fail.
+ * @brief Add a response callback. Will be called in consequence of success or fail.
  *
  * @param response The block contains the callback code.
+ * 
+ * @see onQueue:response:
  */
 - (instancetype)response:(NMBPromiseResponse)response;
 
+/**
+ * @brief Add a response callback on the specific queue. Will be called in consequence of success or fail.
+ *
+ * @param response The block contains the callback code.
+ * @param queue The queue on which the callback will be called. If nil passed, the callback will be run on the main queue.
+ *
+ * @see response:
+ */
 - (instancetype)onQueue:(dispatch_queue_t)queue
                response:(NMBPromiseResponse)response;
 
@@ -93,9 +103,19 @@ typedef NS_ENUM(NSUInteger, NMBPromiseState)
  * @brief Add a success callback.
  *
  * @param success The block contains the callback code.
+ *
+ * @see onQueue:success:
  */
 - (instancetype)success:(NMBPromiseSuccess)success;
 
+/**
+ * @brief Add a success callback on the specific queue.
+ *
+ * @param success The block contains the callback code.
+ * @param queue The queue on which the callback will be called. If nil passed, the callback will be run on the main queue.
+ *
+ * @see success:
+ */
 - (instancetype)onQueue:(dispatch_queue_t)queue
                 success:(NMBPromiseSuccess)success;
 
@@ -103,18 +123,38 @@ typedef NS_ENUM(NSUInteger, NMBPromiseState)
  * @brief Add a fail callback.
  *
  * @param fail The block contains the callback code.
+ *
+ * @see onQueue:fail:
  */
 - (instancetype)fail:(NMBPromiseFail)fail;
 
+/**
+ * @brief Add a fail callback on the specific queue.
+ *
+ * @param fail The block contains the callback code.
+ * @param queue The queue on which the callback will be called. If nil passed, the callback will be run on the main queue.
+ *
+ * @see fail:
+ */
 - (instancetype)onQueue:(dispatch_queue_t)queue
                    fail:(NMBPromiseFail)fail;
 /**
  * @brief Add a progress callback.
  *
  * @param progress The block contains the callback code.
+ *
+ * @see onQueue:progress:
  */
 - (instancetype)progress:(NMBPromiseProgress)progress;
 
+/**
+ * @brief Add a progress callback on the specific queue.
+ *
+ * @param progress The block contains the callback code.
+ * @param queue The queue on which the callback will be called. If nil passed, the callback will be run on the main queue.
+ *
+ * @see progress:
+ */
 - (instancetype)onQueue:(dispatch_queue_t)queue
                progress:(NMBPromiseProgress)progress;
 

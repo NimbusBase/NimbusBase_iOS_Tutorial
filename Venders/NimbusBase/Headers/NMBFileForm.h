@@ -36,7 +36,7 @@
 @property(nonatomic, assign)BOOL isFolder;
 
 /**
- * @brief The extension of the file
+ * @brief The extension of the file.
  */
 @property(nonatomic, assign)NSString *extension;
 
@@ -56,6 +56,14 @@
  */
 + (instancetype)folderWithName:(NSString *)name;
 
+/**
+ * @brief Initializes the receiver with the new name the related file is supposed to be renamed to.
+ *
+ * @param name The new name of the related file.
+ * @param file The file need to be renamed.
+ *
+ * @return An instance of NMBFileForm has same properties with original file except the name.
+ */
 + (instancetype)rename:(NSString *)name file:(NMBFile *)file;
 
 /**

@@ -62,6 +62,14 @@
  */
 - (NMBPromise *)deleteFile:(NMBFile *)file;
 
+/**
+ * @brief Rename a file.
+ *
+ * @param file The file you want to rename.
+ * @param form The information collection contains the new name.
+ *
+ * @return An object to manage netwrok operation. See NMBPromise.
+ */
 - (NMBPromise *)renameFile:(NMBFile *)file withForm:(NMBFileForm *)form;
 
 

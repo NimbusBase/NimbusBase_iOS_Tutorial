@@ -44,7 +44,7 @@
 @property(nonatomic, readonly, copy)NSData *content;
 
 /**
- * @brief The extension of the file
+ * @brief The extension of the file.
  */
 @property(nonatomic, readonly, copy)NSString *extension;
 
