@@ -47,6 +47,7 @@ NCUObjectCreatorViewControllerDelegate>
     self.fetchedResultsController = self.fetchedResultsController;
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
+    NMBLogError(error);
     
     self.title = self.fetchedResultsController.fetchRequest.entity.name;
 }
@@ -89,21 +90,14 @@ NCUObjectCreatorViewControllerDelegate>
         label.minimumScaleFactor = 0.5f;
     }
     
+    NSManagedObject
+    *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [managedObject titleWithController:self.controller];
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView
-  willDisplayCell:(UITableViewCell *)cell
-forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject
-    *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    cell.textLabel.text = [managedObject titleWithController:self.controller];
-}
-
 
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,6 +146,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         case NSFetchedResultsChangeDelete:
             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
                           withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+        case NSFetchedResultsChangeMove:
+        default:
             break;
     }
 }
@@ -266,6 +264,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
     NSError *error = nil;
     [moc save:&error];
+    NMBLogError(error);
 }
 
 - (NSManagedObject *)createObject
@@ -314,6 +313,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     NSFetchRequest
     *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
     fetchRequest.sortDescriptors = self.controller.sortDecriptorsByEntityName[entityName];
+    fetchRequest.includesSubentities = NO;
     
     return _fetchRequest = fetchRequest;
 }
