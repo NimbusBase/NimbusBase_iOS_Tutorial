@@ -253,6 +253,15 @@ moveRowAtIndexPath:(NSIndexPath *)fromIndexPath
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.isEditing) {
+        NSIndexPath *oldIndexPath = self.editingIndexPath;
+        if (oldIndexPath != nil) {
+            NCUAttributeViewCell
+            *cell = (NCUAttributeViewCell *)[self.tableView cellForRowAtIndexPath:oldIndexPath];
+            [self validateAndSaveEditingAttribute:nil
+                                     withNewValue:cell.value
+                                       allowReset:YES];
+        }
+        
         self.editingIndexPath = indexPath;
     }
     
