@@ -1,6 +1,8 @@
 NimbusBase iOS Tutorial
 =======================
 
-"NimbusBase iOS Tutorial" is a sample NimbusBase app, is a cloud file browser that is capable of browsing files on and uploading photos to (Google Drive, Dropbox, Box). 
+"NimbusBase iOS Tutorial" is a sample NimbusBase app on demonstrating how to sync between Android and iOS devices via personal cloud (Google Drive, Dropbox, Box). 
+
+Companion project: [NimbusBase Android Tutorial](https://github.com/NimbusBase/NimbusBase_Android_Tutorial)
 
 For more information, please visit our [Tutorial Page](http://nimbusbase.com/tutorial-ios.html).
