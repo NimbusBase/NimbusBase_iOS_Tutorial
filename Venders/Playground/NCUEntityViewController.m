@@ -47,7 +47,6 @@ NCUObjectCreatorViewControllerDelegate>
     self.fetchedResultsController = self.fetchedResultsController;
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
-    NMBLogError(error);
     
     self.title = self.fetchedResultsController.fetchRequest.entity.name;
 }
@@ -264,7 +263,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
     NSError *error = nil;
     [moc save:&error];
-    NMBLogError(error);
 }
 
 - (NSManagedObject *)createObject
